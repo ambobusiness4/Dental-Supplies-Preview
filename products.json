@@ -1,0 +1,882 @@
+[
+  {
+    "id": "sku-01",
+    "category_en": "Infection Control & Disposables",
+    "category_ar": "الوقاية والتعقيم والأنسبة",
+    "name_en": "Nitrile Examination Gloves (Blue) - Medium",
+    "name_ar": "كفوف نيتريل للفحص (أزرق) - قياس وسط",
+    "brand": "TopGlove",
+    "unit": "Box of 100",
+    "image": "https://via.placeholder.com/150?text=Nitrile+Gloves",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 6.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 5.9,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 7,
+        "currency": "USD",
+        "stock": "Low Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-02",
+    "category_en": "Infection Control & Disposables",
+    "category_ar": "الوقاية والتعقيم والأنسبة",
+    "name_en": "Surgical Face Masks 3-Ply with Earloop",
+    "name_ar": "كمامات جراحية 3 طبقات مع مطاط",
+    "brand": "SafeTouch",
+    "unit": "Box of 50",
+    "image": "https://via.placeholder.com/150?text=Face+Masks",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 3,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 2.75,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 3.25,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-03",
+    "category_en": "Infection Control & Disposables",
+    "category_ar": "الوقاية والتعقيم والأنسبة",
+    "name_en": "Waterproof Dental Bibs 3-Ply",
+    "name_ar": "مريول أسنان مضاد للماء 3 طبقات",
+    "brand": "Medicom",
+    "unit": "Pack of 500",
+    "image": "https://via.placeholder.com/150?text=Dental+Bibs",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 14,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 13.5,
+        "currency": "USD",
+        "stock": "Low Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-04",
+    "category_en": "Infection Control & Disposables",
+    "category_ar": "الوقاية والتعقيم والأنسبة",
+    "name_en": "Disposable Saliva Ejectors (Flexible)",
+    "name_ar": "ماصات لعاب مرنة للاستعمال مرة واحدة",
+    "brand": "Monoject",
+    "unit": "Pack of 100",
+    "image": "https://via.placeholder.com/150?text=Saliva+Ejectors",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 4,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 3.75,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-05",
+    "category_en": "Infection Control & Disposables",
+    "category_ar": "الوقاية والتعقيم والأنسبة",
+    "name_en": "Self-Sealing Sterilization Pouches (90x230mm)",
+    "name_ar": "أكياس تعقيم ذاتية الإغلاق (90×230 مم)",
+    "brand": "Euronda",
+    "unit": "Box of 200",
+    "image": "https://via.placeholder.com/150?text=Sterilization+Pouches",
+    "distributors": [
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 10.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 11,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-06",
+    "category_en": "Infection Control & Disposables",
+    "category_ar": "الوقاية والتعقيم والأنسبة",
+    "name_en": "Surface Disinfectant Wipes (CaviWipes)",
+    "name_ar": "مناديل مطهرة للأسطح (كافي وايبس)",
+    "brand": "Kerr",
+    "unit": "Canister of 160",
+    "image": "https://via.placeholder.com/150?text=Disinfectant+Wipes",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 18,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 17,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-07",
+    "category_en": "Infection Control & Disposables",
+    "category_ar": "الوقاية والتعقيم والأنسبة",
+    "name_en": "High-Volume Evacuation Suction Tips",
+    "name_ar": "قنيات شفط عالية الحجم",
+    "brand": "Crosstex",
+    "unit": "Pack of 100",
+    "image": "https://via.placeholder.com/150?text=Suction+Tips",
+    "distributors": [
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 4.75,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-08",
+    "category_en": "Infection Control & Disposables",
+    "category_ar": "الوقاية والتعقيم والأنسبة",
+    "name_en": "Autoclave Indicator Tape",
+    "name_ar": "شريط مؤشر الأوتوكلاف",
+    "brand": "3M",
+    "unit": "1 Roll (18mm x 55m)",
+    "image": "https://via.placeholder.com/150?text=Autoclave+Tape",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 4.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      }
+    ]
+  },
+  {
+    "id": "sku-09",
+    "category_en": "Anesthetics & Needles",
+    "category_ar": "المخدر والمحاقن",
+    "name_en": "Lidocaine 2% with Epinephrine 1:100,000",
+    "name_ar": "ليدوكائين 2% مع إبينفرين 1:100.000",
+    "brand": "Septodont (Xylocaine)",
+    "unit": "Box of 50 Cartridges",
+    "image": "https://via.placeholder.com/150?text=Lidocaine",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 24,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 22.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 23,
+        "currency": "USD",
+        "stock": "Low Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-10",
+    "category_en": "Anesthetics & Needles",
+    "category_ar": "المخدر والمحاقن",
+    "name_en": "Articaine 4% with Epinephrine 1:100,000",
+    "name_ar": "أرتيكائين 4% مع إبينفرين 1:100.000",
+    "brand": "Septodont (Septanest)",
+    "unit": "Box of 50 Cartridges",
+    "image": "https://via.placeholder.com/150?text=Septanest",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 30,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 28.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-11",
+    "category_en": "Anesthetics & Needles",
+    "category_ar": "المخدر والمحاقن",
+    "name_en": "Mepivacaine 3% Plain (Without Vasoconstrictor)",
+    "name_ar": "مبيفاكائين 3% بدون قابض أوعية",
+    "brand": "Inibsa",
+    "unit": "Box of 50 Cartridges",
+    "image": "https://via.placeholder.com/150?text=Mepivacaine",
+    "distributors": [
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 25,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 26,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-12",
+    "category_en": "Anesthetics & Needles",
+    "category_ar": "المخدر والمحاقن",
+    "name_en": "Dental Needles 27G Long (30mm)",
+    "name_ar": "إبر تخدير أسنان 27G طويلة (30 مم)",
+    "brand": "Septoject",
+    "unit": "Box of 100",
+    "image": "https://via.placeholder.com/150?text=Long+Needles",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 8,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 7.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-13",
+    "category_en": "Anesthetics & Needles",
+    "category_ar": "المخدر والمحاقن",
+    "name_en": "Dental Needles 30G Short (21mm)",
+    "name_ar": "إبر تخدير أسنان 30G قصيرة (21 مم)",
+    "brand": "Septoject",
+    "unit": "Box of 100",
+    "image": "https://via.placeholder.com/150?text=Short+Needles",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 8,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 7.75,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-14",
+    "category_en": "Restorative Materials",
+    "category_ar": "المواد الترميمية والحشوات",
+    "name_en": "Filtek Z250 Universal Composite - Shade A2",
+    "name_ar": "كومبوزيت حشوة ضوئية Filtek Z250 - درجة A2",
+    "brand": "3M ESPE",
+    "unit": "1 Syringe (4g)",
+    "image": "https://via.placeholder.com/150?text=Filtek+A2",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 27,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 25.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 26,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-15",
+    "category_en": "Restorative Materials",
+    "category_ar": "المواد الترميمية والحشوات",
+    "name_en": "Filtek Z250 Universal Composite - Shade A3",
+    "name_ar": "كومبوزيت حشوة ضوئية Filtek Z250 - درجة A3",
+    "brand": "3M ESPE",
+    "unit": "1 Syringe (4g)",
+    "image": "https://via.placeholder.com/150?text=Filtek+A3",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 27,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 25.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-16",
+    "category_en": "Restorative Materials",
+    "category_ar": "المواد الترميمية والحشوات",
+    "name_en": "Single Bond Universal Dental Adhesive",
+    "name_ar": "لاصق أسنان عام Single Bond (بوند)",
+    "brand": "3M ESPE",
+    "unit": "1 Bottle (5ml)",
+    "image": "https://via.placeholder.com/150?text=Dental+Bond",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 36,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 34,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-17",
+    "category_en": "Restorative Materials",
+    "category_ar": "المواد الترميمية والحشوات",
+    "name_en": "37% Phosphoric Acid Etching Gel Kit",
+    "name_ar": "حمض تخرش فسفوري 37% (إتشنغ جل)",
+    "brand": "Kerr",
+    "unit": "1 Syringe (12g) + 10 Tips",
+    "image": "https://via.placeholder.com/150?text=Etch+Gel",
+    "distributors": [
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 8.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 8,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-18",
+    "category_en": "Restorative Materials",
+    "category_ar": "المواد الترميمية والحشوات",
+    "name_en": "Sectional Matrix System Starter Kit",
+    "name_ar": "طقم مساند معدنية قطعية (سكشنال ماتريكس)",
+    "brand": "Palodent Plus",
+    "unit": "Kit (Rings + Wedges + Matrices)",
+    "image": "https://via.placeholder.com/150?text=Matrix+Kit",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 75,
+        "currency": "USD",
+        "stock": "Low Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 72,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-19",
+    "category_en": "Restorative Materials",
+    "category_ar": "المواد الترميمية والحشوات",
+    "name_en": "High-Speed Diamond Burs Assorted Set",
+    "name_ar": "طقم سنابك ألماسية للتربين العالي السرعة",
+    "brand": "Mani",
+    "unit": "Pack of 10 Burs",
+    "image": "https://via.placeholder.com/150?text=Diamond+Burs",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 12,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 11.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 11,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-20",
+    "category_en": "Restorative Materials",
+    "category_ar": "المواد الترميمية والحشوات",
+    "name_en": "Carbide Burs FG #330",
+    "name_ar": "سنابك كاربايد للتربين FG #330",
+    "brand": "SS White",
+    "unit": "Pack of 5 Burs",
+    "image": "https://via.placeholder.com/150?text=Carbide+Burs",
+    "distributors": [
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 10,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-21",
+    "category_en": "Restorative Materials",
+    "category_ar": "المواد الترميمية والحشوات",
+    "name_en": "Composite Finishing & Polishing Discs Set",
+    "name_ar": "أقراص إنهاء وتلميع الكومبوزيت",
+    "brand": "Sof-Lex (3M)",
+    "unit": "Box of 120 Discs + Mandrel",
+    "image": "https://via.placeholder.com/150?text=Polishing+Discs",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 32,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 30,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-22",
+    "category_en": "Impression & Cements",
+    "category_ar": "المواد الطابعة والأسمنت",
+    "name_en": "Dust-Free Chromatic Alginate Impression Powder",
+    "name_ar": "ألجينات طبعة خالية من الغبار متغيرة اللون",
+    "brand": "Cavex ColorChange",
+    "unit": "Bag of 500g",
+    "image": "https://via.placeholder.com/150?text=Alginate",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 9.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 8.8,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 9,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-23",
+    "category_en": "Impression & Cements",
+    "category_ar": "المواد الطابعة والأسمنت",
+    "name_en": "Addition Silicone VPS Impression Material Set",
+    "name_ar": "سيليكون إضافة لطبعة الأسنان (Heavy + Light Body)",
+    "brand": "Zhermack Elite HD+",
+    "unit": "Kit (Putty 250ml + Light 50ml)",
+    "image": "https://via.placeholder.com/150?text=VPS+Silicone",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 62,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 59,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-24",
+    "category_en": "Impression & Cements",
+    "category_ar": "المواد الطابعة والأسمنت",
+    "name_en": "Automix Dynamic Impression Mixing Tips (Yellow)",
+    "name_ar": "رؤوس خلط سيليكون أوتوماتيكية (صفراء)",
+    "brand": "Mixpac",
+    "unit": "Pack of 50 Tips",
+    "image": "https://via.placeholder.com/150?text=Mixing+Tips",
+    "distributors": [
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 7,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 6.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-25",
+    "category_en": "Impression & Cements",
+    "category_ar": "المواد الطابعة والأسمنت",
+    "name_en": "Glass Ionomer Luting Cement (Gold Label 1)",
+    "name_ar": "سمنت زجاجي للالتصاق (غلاس أينومر لوتينغ)",
+    "brand": "GC Fuji I",
+    "unit": "Kit (35g Powder + 25g Liquid)",
+    "image": "https://via.placeholder.com/150?text=Fuji+1+Cement",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 48,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 45,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-26",
+    "category_en": "Impression & Cements",
+    "category_ar": "المواد الطابعة والأسمنت",
+    "name_en": "Non-Eugenol Temporary Crown & Bridge Cement",
+    "name_ar": "سمنت مؤقت للجثور والتيجان (بدون إيجينول)",
+    "brand": "RelyX Temp NE (3M)",
+    "unit": "Kit (36g Base + 16g Catalyst)",
+    "image": "https://via.placeholder.com/150?text=Temp+Cement",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 29,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 27.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-27",
+    "category_en": "Endodontics & Surgical",
+    "category_ar": "معالجة الجذور والجراحة",
+    "name_en": "Hand K-Files #15-40 Assorted (25mm)",
+    "name_ar": "مبارد جذور يدوي K-Files قياس #15-40 (25 مم)",
+    "brand": "Dentsply Maillefer",
+    "unit": "Box of 6 Files",
+    "image": "https://via.placeholder.com/150?text=K-Files",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 6.2,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 5.8,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 6,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-28",
+    "category_en": "Endodontics & Surgical",
+    "category_ar": "معالجة الجذور والجراحة",
+    "name_en": "Sodium Hypochlorite 5.25% Irrigating Solution",
+    "name_ar": "محلول هيبوكلوريت الصوديوم 5.25% لغسيل القنوات",
+    "brand": "EndoWash",
+    "unit": "Bottle of 1000ml",
+    "image": "https://via.placeholder.com/150?text=NaOCl+Solution",
+    "distributors": [
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 4.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 4,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-29",
+    "category_en": "Endodontics & Surgical",
+    "category_ar": "معالجة الجذور والجراحة",
+    "name_en": "Surgical Stainless Steel Blades #15",
+    "name_ar": "شفرات جراحية ستانلس ستيل رقم 15",
+    "brand": "Swann-Morton",
+    "unit": "Box of 100 Blades",
+    "image": "https://via.placeholder.com/150?text=Surgical+Blades",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 10,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-2",
+        "name": "الشرق",
+        "price": 9.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Same Day"
+      }
+    ]
+  },
+  {
+    "id": "sku-30",
+    "category_en": "Endodontics & Surgical",
+    "category_ar": "معالجة الجذور والجراحة",
+    "name_en": "Black Braided Silk Sutures 3-0 with Reverse Cutting Needle",
+    "name_ar": "خيوط جراحية حرير أسود 3-0 مع إبرة قاطعة",
+    "brand": "Ethicon Silk",
+    "unit": "Box of 36 Sutures",
+    "image": "https://via.placeholder.com/150?text=Silk+Sutures",
+    "distributors": [
+      {
+        "id": "dist-1",
+        "name": "اللواج",
+        "price": 24,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "2 Hours"
+      },
+      {
+        "id": "dist-3",
+        "name": "إدوارد",
+        "price": 22.5,
+        "currency": "USD",
+        "stock": "In Stock",
+        "delivery": "Next Day"
+      }
+    ]
+  }
+]
