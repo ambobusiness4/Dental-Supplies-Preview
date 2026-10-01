@@ -879,6 +879,23 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 .chip.on { border-color: var(--pri); background: var(--pri); color: #fff; }
 .prod-price-col { direction: rtl; flex-direction: row; justify-content: flex-start; }
 .prod-from-price { direction: rtl; display: inline; }
+
+/* The reference screens are phone-sized, but the live demo should use a tablet viewport well. */
+@media (min-width: 600px) {
+  body { background: #F8FAFC; }
+  .app { width: 100%; max-width: none; min-height: 100vh; box-shadow: none; }
+  .hdr { padding-inline: clamp(24px, 6vw, 72px); }
+  main { padding-inline: clamp(24px, 6vw, 72px); }
+  #l { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .prod-icon { height: 150px; }
+  .dist-count { top: 150px; }
+  .nav { padding-inline: clamp(24px, 6vw, 72px); }
+}
+@media (min-width: 960px) {
+  #l { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .prod-icon { height: 170px; }
+  .dist-count { top: 170px; }
+}
 </style>
 </head>
 <body>
