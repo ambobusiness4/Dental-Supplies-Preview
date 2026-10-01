@@ -896,6 +896,14 @@ main { padding: 10px 24px 18px; background: var(--bg); }
   .prod-icon { height: 170px; }
   .dist-count { top: 170px; }
 }
+
+/* Tablet shell: use the complete viewport rather than the phone preview width. */
+html, body { width: 100%; min-width: 100%; }
+body, .app, main { background: #fff; }
+@media (min-width: 431px) {
+  body { background: #fff; }
+  .app { width: 100%; max-width: none; margin-inline: 0; border-inline: 0; box-shadow: none; }
+}
 </style>
 </head>
 <body>
