@@ -802,6 +802,110 @@ main {
   line-height: 1.4;
 }
 .tl-title.pending { color: var(--mute); }
+
+/* ─── MVP visual language from the design screens ─── */
+:root {
+  --ink: #1F2937;
+  --ink-sub: #4B5563;
+  --mute: #6B7280;
+  --line: #E5E7EB;
+  --bg: #F8FAFC;
+  --pri: #2563EB;
+  --pri-soft: #EFF6FF;
+  --pri-border: #BFDBFE;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-md: 0 4px 12px rgba(0,0,0,.04);
+}
+body { background: #eef2f7; font-family: 'Cairo', Tahoma, sans-serif; }
+.app { max-width: 402px; background: var(--bg); box-shadow: 0 0 35px rgba(15,23,42,.08); }
+.hdr { height: 66px; padding: 0 24px; border-bottom: 0; }
+.hdr-title { color: var(--pri); font-size: 20px; font-weight: 700; }
+.hdr-logo { width: 32px; height: 32px; border-radius: 10px; overflow: hidden; background: var(--pri); }
+.hdr-logo img { width: 100%; height: 100%; object-fit: cover; }
+.hdr-btn { width: 40px; height: 40px; border-radius: 50%; background: #F3F4F6; }
+main { padding: 10px 24px 18px; background: var(--bg); }
+.search-wrap { margin: 0 0 16px; }
+.search { padding: 12px 42px 12px 14px; border: 0; border-radius: 10px; background: #F3F4F6; box-shadow: none; }
+.search:focus { background: #fff; }
+.chips { gap: 8px; padding: 0 0 20px; }
+.chip { padding: 7px 13px; border: 0; background: #fff; color: var(--ink-sub); border-radius: 7px; font-size: 12px; font-weight: 600; }
+.chip.on { background: var(--pri); box-shadow: none; }
+#l { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.prod-card { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 0; min-width: 0; padding: 0; margin: 0; overflow: hidden; text-align: right; border: 1px solid var(--line); border-radius: 12px; background: #fff; box-shadow: var(--shadow-md); transform: none; }
+.prod-card:hover { transform: none; box-shadow: 0 5px 16px rgba(37,99,235,.10); }
+.prod-icon { width: 100%; height: 110px; border-radius: 0; background: linear-gradient(145deg,#eaf2ff,#dbeafe); color: var(--pri); font-size: 30px; }
+.prod-body { padding: 10px 12px 0; }
+.prod-name { font-size: 14px; line-height: 1.45; white-space: normal; height: 41px; color: var(--ink); }
+.prod-brand { display: none; }
+.prod-meta { margin-top: 8px; min-height: 17px; display: flex; justify-content: flex-start; }
+.avail-badge { font-size: 11px; padding: 0; background: transparent !important; }
+.avail-badge.good { color: var(--good); }
+.avail-badge.warn { color: var(--warn); }
+.avail-badge.bad { color: var(--bad); }
+.dist-count { position: absolute; inset-inline-start: 12px; top: 110px; transform: translateY(-50%); margin-inline-start: 0; padding: 4px 8px; border-radius: 6px; background: var(--pri-soft); color: var(--pri); font-size: 11px; }
+.dist-count svg { display: none; }
+.prod-price-col { order: 3; display: flex; flex-direction: row-reverse; align-items: baseline; gap: 4px; padding: 8px 12px 11px; margin-top: 8px; border-top: 1px solid #F3F4F6; text-align: right; }
+.prod-from-label { font-size: 12px; color: var(--mute); }
+.prod-from-price { font-size: 15px; color: var(--pri); }
+.nav { height: 68px; padding: 10px 24px 0; border-top: 1px solid var(--line); justify-content: space-around; }
+.nav-item { flex: 0 0 70px; padding: 0; gap: 4px; font-size: 11px; font-weight: 500; }
+.nav-item.active { color: var(--pri); font-weight: 700; }
+.nav-item svg { width: 22px; height: 22px; }
+.detail-hero, .card, .offer-card, .cart-item, .summary-card { box-shadow: 0 4px 12px rgba(0,0,0,.03); }
+@media (min-width: 500px) { .app { border-inline: 0; } }
+@media (max-width: 360px) { main { padding-inline: 16px; } .hdr { padding-inline: 16px; } #l { gap: 10px; } }
+
+/* Small interaction and RTL polish */
+.search { border-radius: 999px; }
+.search-icon { inset-inline-end: auto; inset-inline-start: 12px; }
+.chip { border-radius: 999px; }
+.prod-price-col { direction: rtl; flex-direction: row; justify-content: flex-start; text-align: right; }
+.prod-from-label { direction: rtl; text-align: right; }
+.detail-hero { padding: 0 0 18px; overflow: hidden; }
+.detail-hero-icon { width: 100%; height: 220px; margin: 0 0 16px; border-radius: 0; font-size: 64px; }
+.detail-hero-name, .detail-hero-spec { padding-inline: 18px; }
+
+/* Reference-screen details: visible controls, consistent borders and hierarchy */
+.hdr-title { color: #111827; }
+.hdr.home-hdr { justify-content: space-between; }
+.brand-lockup { display: flex; align-items: center; gap: 8px; direction: rtl; }
+.brand-lockup .hdr-logo { flex: none; }
+.home-title { margin: 0; color: var(--pri); font-size: 20px; font-weight: 700; line-height: 1; }
+.notification-btn { color: #1F2937; }
+.search { border: 1px solid #E5E7EB; background: #F3F4F6; }
+.chip { border: 1px solid #E5E7EB; background: #fff; color: #4B5563; }
+.chip.on { border-color: var(--pri); background: var(--pri); color: #fff; }
+.prod-price-col { direction: rtl; flex-direction: row; justify-content: flex-start; }
+.prod-from-price { direction: rtl; display: inline; }
+
+/* The reference screens are phone-sized, but the live demo should use a tablet viewport well. */
+@media (min-width: 600px) {
+  body { background: #F8FAFC; }
+  .app { width: 100%; max-width: none; min-height: 100vh; box-shadow: none; }
+  .hdr { padding-inline: clamp(24px, 6vw, 72px); }
+  main { padding-inline: clamp(24px, 6vw, 72px); }
+  #l { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .prod-icon { height: 150px; }
+  .dist-count { top: 150px; }
+  .nav { padding-inline: clamp(24px, 6vw, 72px); }
+}
+@media (min-width: 960px) {
+  #l { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .prod-icon { height: 170px; }
+  .dist-count { top: 170px; }
+}
+
+/* Tablet shell: use the complete viewport rather than the phone preview width. */
+html, body { width: 100%; min-width: 100%; }
+body, .app, main { background: #fff; }
+@media (min-width: 431px) {
+  body { background: #fff; }
+  .app { width: 100%; max-width: none; margin-inline: 0; border-inline: 0; box-shadow: none; }
+}
+
+.prod-icon img, .detail-hero-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
 </style>
 </head>
 <body>
@@ -811,6 +915,13 @@ main {
    DATA  (unchanged from original)
 ══════════════════════════════════════════════ */
 const CATS = ["الوقاية والتعقيم","المخدر والمحاقن","المواد الترميمية","المواد الطابعة والأسمنت","معالجة الجذور والجراحة"];
+const PRODUCT_IMAGES = [
+  "assets/product-infection-control.png",
+  "assets/product-anesthetic.png",
+  "assets/product-materials.png",
+  "assets/product-materials.png",
+  "assets/product-materials.png"
+];
 const P = [
   [0,"كفوف نتريل غير مبودرة","Ansell","علبة 100 كفوف",9],
   [0,"كمامات طبية 3 طبقات","Medicom","علبة 50 كمامة",4],
@@ -901,7 +1012,7 @@ function iconSearch(size=18) {
 }
 function iconBack() {
   return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="15 18 9 12 15 6"/>
+    <polyline points="9 18 15 12 9 6"/>
   </svg>`;
 }
 function iconCheck(size=16, color="white") {
@@ -972,13 +1083,12 @@ function renderList() {
     const distCount = p.offers.length;
     return `
     <button class="prod-card" onclick="go('detail',${p.id})" aria-label="عرض تفاصيل ${p.title}">
-      <div class="prod-icon">${p.brand[0]}</div>
+      <div class="prod-icon"><img src="${PRODUCT_IMAGES[p.cat]}" alt="${p.title}" loading="lazy"></div>
       <div class="prod-body">
         <div class="prod-name">${p.title}</div>
-        <div class="prod-brand" dir="ltr">${p.brand}</div>
         <div class="prod-meta">
           <span class="avail-badge ${stClass}">● ${stLabel}</span>
-          <span class="dist-count">${iconStore(12)}&nbsp;${distCount} موردين</span>
+          <span class="dist-count">${distCount} موزعين</span>
         </div>
       </div>
       <div class="prod-price-col">
@@ -991,12 +1101,16 @@ function renderList() {
 
 function screenHome() {
   return `
-  <header class="hdr" role="banner">
-    <div class="hdr-logo" aria-hidden="true">🦷</div>
-    <h1 class="hdr-title">مستلزمات العيادة</h1>
-    <button class="hdr-btn" onclick="go('cart')" aria-label="السلة${cnt()?` (${cnt()} عناصر)`:''}">
-      ${iconCart()}
-      ${cartCount()}
+  <header class="hdr home-hdr" role="banner">
+    <div class="brand-lockup">
+      <div class="hdr-logo" aria-hidden="true"><img src="assets/icon-192.png" alt=""></div>
+      <h1 class="home-title">عيادتي</h1>
+    </div>
+    <button class="hdr-btn notification-btn" aria-label="الإشعارات">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        <circle cx="18.5" cy="5.5" r="2.5" fill="#EF4444" stroke="white" stroke-width="1.5"/>
+      </svg>
     </button>
   </header>
   <main id="main-scroll">
@@ -1024,19 +1138,15 @@ function screenDetail() {
   <header class="hdr" role="banner">
     <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack()}</button>
     <h1 class="hdr-title">مقارنة الأسعار</h1>
-    <button class="hdr-btn" onclick="go('cart')" aria-label="السلة${cnt()?` (${cnt()} عناصر)`:''}">
-      ${iconCart()}
-      ${cartCount()}
-    </button>
+    <div class="hdr-spacer"></div>
   </header>
   <main>
     <div class="detail-hero">
-      <div class="detail-hero-icon">${p.brand[0]}</div>
+      <div class="detail-hero-icon"><img src="${PRODUCT_IMAGES[p.cat]}" alt="${p.title}"></div>
       <div class="detail-hero-name">${p.title}</div>
       <div class="detail-hero-spec">
         <span dir="ltr">${p.brand}</span><br>
-        التعبئة: ${p.unit}<br>
-        السعر بالدولار الأمريكي لكل وحدة تعبئة
+        التعبئة: ${p.unit}
       </div>
     </div>
     ${p.offers.map(o => {
