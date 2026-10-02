@@ -497,10 +497,16 @@ main {
 
 /* ─── Detail screen ───
    Matches "Dental Supplies design html/product-details.html" */
-.detail-hdr { border-bottom-color: #E2E8F0; }
+.hdr.detail-hdr { border-bottom: 1px solid #E2E8F0; }
 .detail-hdr .hdr-title { color: #0F172A; font-size: 20px; font-weight: 700; }
-.detail-hdr .hdr-btn { width: 40px; height: 40px; background: transparent; color: #0F172A; }
-.detail-hdr .hdr-btn:hover { background: #F3F4F6; }
+.detail-hdr .hdr-btn {
+  width: 40px;
+  height: 40px;
+  background: #F3F4F6;
+  border-radius: 8px;
+  color: #0F172A;
+}
+.detail-hdr .hdr-btn:hover { background: #E5E7EB; }
 .detail-hdr .hdr-share {
   width: 32px;
   height: 32px;
@@ -549,12 +555,12 @@ main {
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 10px;
 }
 .detail-title-row {
   display: inline-flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
   gap: 8px;
 }
@@ -595,7 +601,7 @@ main {
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: 12px;
 }
 .detail-section-title {
@@ -618,7 +624,7 @@ main {
   align-self: stretch;
   width: 100%;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
   gap: 12px;
   padding: 14px;
@@ -653,7 +659,7 @@ main {
 }
 .offer-header {
   display: inline-flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
   gap: 8px;
   margin: 0;
@@ -792,6 +798,7 @@ main {
   width: 100%;
   height: 48px;
   display: inline-flex;
+  flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
   gap: 8px;
@@ -1130,7 +1137,7 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 .search { padding: 12px 42px 12px 14px; border: 0; border-radius: 10px; background: #F3F4F6; box-shadow: none; }
 .search:focus { background: #fff; }
 .chips { gap: 8px; padding: 0 0 20px; }
-.chip { padding: 7px 13px; border: 0; background: #fff; color: var(--ink-sub); border-radius: 7px; font-size: 12px; font-weight: 600; }
+.chip { padding: 7px 13px; border: 0; background: #F3F4F6; color: var(--ink-sub); border-radius: 7px; font-size: 12px; font-weight: 600; }
 .chip.on { background: var(--pri); box-shadow: none; }
 #l { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .nav { height: 68px; padding: 10px 24px 0; border-top: 1px solid var(--line); justify-content: space-around; }
@@ -1154,7 +1161,7 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 .home-title { margin: 0; color: var(--pri); font-size: 20px; font-weight: 700; line-height: 1; }
 .notification-btn { color: #1F2937; }
 .search { border: 1px solid #E5E7EB; background: #F3F4F6; }
-.chip { border: 1px solid #E5E7EB; background: #fff; color: #4B5563; }
+.chip { border: 1px solid #E5E7EB; background: #F3F4F6; color: #4B5563; }
 .chip.on { border-color: var(--pri); background: var(--pri); color: #fff; }
 
 /* The reference screens are phone-sized, but the live demo should use a tablet viewport well. */
@@ -1181,7 +1188,7 @@ body, .app, main { background: #fff; }
 }
 
 .prod-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.detail-hero-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.detail-hero-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
 </style>
 </head>
 <body>
@@ -1304,8 +1311,8 @@ function chg(i, n) {
    ICON HELPERS (inline SVG)
 ══════════════════════════════════════════════ */
 function iconCart(size=20) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>
+  return `<svg width="${size}" height="${size}" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <path d="M1.87881 1.87881H3.71215L6.15048 13.2644C6.23993 13.6814 6.47193 14.0541 6.80655 14.3185C7.14117 14.5828 7.55748 14.7223 7.98381 14.7128H16.9488C17.3661 14.7121 17.7706 14.5691 18.0956 14.3075C18.4206 14.0458 18.6466 13.6811 18.7363 13.2736L20.2488 6.46238H4.69298M8.24983 19.2507C8.24983 19.757 7.83942 20.1674 7.33316 20.1674C6.8269 20.1674 6.41649 19.757 6.41649 19.2507C6.41649 18.7444 6.8269 18.334 7.33316 18.334C7.83942 18.334 8.24983 18.7444 8.24983 19.2507ZM18.3332 19.2507C18.3332 19.757 17.9228 20.1674 17.4165 20.1674C16.9102 20.1674 16.4998 19.757 16.4998 19.2507C16.4998 18.7444 16.9102 18.334 17.4165 18.334C17.9228 18.334 18.3332 18.7444 18.3332 19.2507Z"/>
   </svg>`;
 }
 function iconHome(size=20) {
@@ -1334,9 +1341,9 @@ function iconStore(size=14) {
   </svg>`;
 }
 /* ── product-details.html icons ── */
-function iconClock(size=12) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>
+function iconTruck(size=12) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M7.00005 8.9997V3.0003C7.00005 2.73511 6.89469 2.48078 6.70714 2.29326C6.51958 2.10574 6.26521 2.0004 5.99997 2.0004H1.99965C1.73442 2.0004 1.48004 2.10574 1.29249 2.29326C1.10494 2.48078 0.999573 2.73511 0.999573 3.0003V8.49975C0.999573 8.63234 1.05226 8.75951 1.14603 8.85327C1.23981 8.94702 1.36699 8.9997 1.49961 8.9997H2.49969M2.49969 8.9997C2.49969 9.55193 2.94744 9.9996 3.49977 9.9996C4.0521 9.9996 4.49985 9.55193 4.49985 8.9997M2.49969 8.9997C2.49969 8.44747 2.94744 7.9998 3.49977 7.9998C4.0521 7.9998 4.49985 8.44747 4.49985 8.9997M4.49985 8.9997H7.50009M7.50009 8.9997C7.50009 9.55193 7.94784 9.9996 8.50017 9.9996C9.0525 9.9996 9.50025 9.55193 9.50025 8.9997M7.50009 8.9997C7.50009 8.44747 7.94784 7.9998 8.50017 7.9998C9.0525 7.9998 9.50025 8.44747 9.50025 8.9997M9.50025 8.9997H10.5003C10.633 8.9997 10.7601 8.94702 10.8539 8.85327C10.9477 8.75951 11.0004 8.63234 11.0004 8.49975V6.67493C11.0002 6.56147 10.9614 6.45146 10.8904 6.36296L9.15022 4.18818C9.10346 4.12962 9.04413 4.08233 8.97661 4.04979C8.9091 4.01725 8.83514 4.0003 8.76019 4.0002H7.00005"/>
   </svg>`;
 }
 function iconStar(size=12) {
@@ -1486,7 +1493,7 @@ function screenDetail() {
         <h2 class="detail-hero-name">${p.title}</h2>
         <span class="detail-cat-pill">${CATS[p.cat]}</span>
       </div>
-      <p class="detail-hero-spec"><span dir="ltr">${p.brand}</span> — التعبئة: ${p.unit}</p>
+      <p class="detail-hero-spec">التعبئة: ${p.unit} — <span dir="ltr">${p.brand}</span></p>
     </div>
 
     <div class="detail-rule"></div>
@@ -1517,7 +1524,7 @@ function screenDetail() {
             <span class="offer-radio">${iconRadio(on, !o.stock)}</span>
             <span class="offer-price">${$(o.price)}</span>
             ${o.stock
-              ? `<span class="offer-eta">${iconClock()} ${o.eta}</span>`
+              ? `<span class="offer-eta">${iconTruck()} ${o.eta}</span>`
               : `<span class="offer-stk bad">${ST[o.stock]}</span>`}
           </div>
         </button>`;
