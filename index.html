@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>مستلزمات الأسنان</title>
 <meta name="description" content="تطبيق طلب مستلزمات الأسنان – قارن الأسعار بين الموردين وأضف للسلة بسهولة">
 <meta name="theme-color" content="#2563EB">
@@ -52,7 +52,7 @@
 /* author display rules (.prod-card is flex) would otherwise beat the UA
    [hidden] rule, so make hiding explicit */
 [hidden] { display: none !important; }
-html, body { height: 100%; margin: 0; }
+html, body { height: 100%; margin: 0; overflow: hidden; overscroll-behavior: none; }
 
 body {
   background: var(--bg);
@@ -69,6 +69,8 @@ button { cursor: pointer; border: none; background: none; padding: 0; }
 .app {
   max-width: 430px;
   min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100dvh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -148,9 +150,10 @@ button { cursor: pointer; border: none; background: none; padding: 0; }
 /* ─── Main scroll area ─── */
 main {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 16px;
-  padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
 }
 
 /* ─── Bottom Navigation ─── */
@@ -734,6 +737,7 @@ main {
   bottom: 0;
   z-index: 5;
   padding: 16px 20px 32px;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
   background: #fff;
   border-top: 1px solid #E2E8F0;
   box-shadow: 0 -4px 16px rgba(15, 23, 42, .03);
@@ -826,9 +830,16 @@ main {
   80%  { transform: scale(1.1)  rotate(-3deg); }
   100% { transform: scale(1)    rotate(0deg); }
 }
-.cart-ico { transform-origin: center; }
+.cart-ico { transform-origin: 50% 50%; will-change: transform; }
 .cart-pop { animation: cart-pop .55s cubic-bezier(.3, 1.4, .5, 1); }
-@media (prefers-reduced-motion: reduce) { .cart-pop { animation: none; } }
+/* reduced motion still needs *some* confirmation, so swap the pop for a flash */
+@keyframes cart-flash {
+  0%, 100% { opacity: 1; }
+  35%      { opacity: .25; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cart-pop { animation: cart-flash .45s ease-in-out; }
+}
 
 /* ─── Cart ───
    Matches "Dental Supplies design html/cart.html" */
@@ -846,6 +857,7 @@ main {
 
 .cart-main {
   padding: 12px 16px 24px;
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1345,6 +1357,7 @@ main {
 
 .tr-main {
   padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -1663,7 +1676,7 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 /* The reference screens are phone-sized, but the live demo should use a tablet viewport well. */
 @media (min-width: 600px) {
   body { background: #F8FAFC; }
-  .app { width: 100%; max-width: none; min-height: 100vh; box-shadow: none; }
+  .app { width: 100%; max-width: none; min-height: 100dvh; max-height: 100dvh; box-shadow: none; }
   .hdr { padding-inline: clamp(24px, 6vw, 72px); }
   main { padding-inline: clamp(24px, 6vw, 72px); }
   #l { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -1846,8 +1859,37 @@ function syncCartBadge() {
   });
 }
 /* Nudge every visible cart glyph so the user sees the item land. */
+/* Replaying a CSS animation by toggling a class depends on the engine
+   flushing style between the remove and the add. Chrome on Android does not
+   reliably do that for an <svg> element, so drive it with the Web Animations
+   API instead and keep the class swap only as a fallback. */
+const CART_POP = [
+  { transform: "scale(1) rotate(0deg)" },
+  { transform: "scale(1.35) rotate(-10deg)", offset: .25 },
+  { transform: "scale(.92) rotate(6deg)",    offset: .55 },
+  { transform: "scale(1.1) rotate(-3deg)",   offset: .80 },
+  { transform: "scale(1) rotate(0deg)" }
+];
+const CART_FLASH = [{ opacity: 1 }, { opacity: .25, offset: .35 }, { opacity: 1 }];
+
+function prefersReducedMotion() {
+  return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+}
+
 function bumpCart() {
+  const reduce = prefersReducedMotion();
+  const frames = reduce ? CART_FLASH : CART_POP;
+  const opts   = reduce
+    ? { duration: 450, easing: "ease-in-out" }
+    : { duration: 550, easing: "cubic-bezier(.3, 1.4, .5, 1)" };
+
   document.querySelectorAll(".cart-ico").forEach(el => {
+    if (typeof el.animate === "function") {
+      // cancel an in-flight pop so rapid taps restart cleanly
+      if (typeof el.getAnimations === "function") el.getAnimations().forEach(a => a.cancel());
+      el.style.transformOrigin = "50% 50%";
+      try { el.animate(frames, opts); return; } catch (e) { /* fall through */ }
+    }
     el.classList.remove("cart-pop");
     void el.getBoundingClientRect();   // force reflow so the animation restarts
     el.classList.add("cart-pop");
