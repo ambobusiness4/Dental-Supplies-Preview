@@ -1772,14 +1772,15 @@ body, .app, main { background: #fff; }
   display: flex; flex-direction: column;
   padding: 0 24px calc(16px + env(safe-area-inset-bottom, 0px));
 }
-.login-hero {
-  height: 200px; margin: 8px 0 4px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--pri-soft); border-radius: 20px;
+/* the banner ships with its own rounded corners and border, so it is shown
+   whole at its native 410x248 rather than cropped to a fixed height */
+.login-hero { margin: 8px 0 4px; }
+.login-hero img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 410 / 248;
+  border-radius: 20px;
   box-shadow: 0 8px 24px rgba(37, 99, 235, .08);
-  overflow: hidden;
 }
-.login-hero img { width: 112px; height: 112px; object-fit: contain; }
 .login-intro { padding: 12px 0 20px; display: flex; flex-direction: column; gap: 10px; }
 .login-lockup { display: flex; align-items: center; gap: 8px; }
 .login-lockup img { width: 36px; height: 36px; border-radius: 10px; }
@@ -3090,7 +3091,7 @@ function screenLogin() {
   return `
   <main class="login-main">
     <div class="login-hero">
-      <img src="assets/icon-192.png" alt="">
+      <img src="assets/login-hero.png" alt="" width="410" height="248" fetchpriority="high">
     </div>
 
     <div class="login-intro">
