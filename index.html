@@ -849,13 +849,16 @@ main {
 
 /* press feedback on anything tappable */
 .prod-card, .offer-card, .pay-opt, .chip, .hdr-btn, .nav-item,
-.btn, .cart-cta, .co-confirm, .detail-add, .tr-call, .qty-btn, .step-btn {
+.btn, .cart-cta, .co-confirm, .detail-add, .tr-call, .qty-btn, .step-btn,
+.ord-card, .acc-row, .hdr-help {
   transition: transform .12s ease, background-color .15s ease, border-color .15s ease;
 }
-.prod-card:active, .offer-card:active, .pay-opt:not(:disabled):active { transform: scale(.985); }
+.prod-card:active, .offer-card:active, .pay-opt:not(:disabled):active,
+.ord-card:active, .acc-row:not(.soon):active { transform: scale(.985); }
 .btn:active, .cart-cta:active, .co-confirm:active,
 .detail-add:not(:disabled):active, .tr-call:active { transform: scale(.975); }
-.chip:active, .hdr-btn:active, .nav-item:active, .qty-btn:not(:disabled):active { transform: scale(.94); }
+.chip:active, .hdr-btn:active, .hdr-help:active, .nav-item:active,
+.qty-btn:not(:disabled):active { transform: scale(.94); }
 
 /* the courier is moving, so the active timeline node breathes */
 @keyframes node-pulse {
@@ -886,23 +889,24 @@ main {
   .prod-card:active, .offer-card:active, .pay-opt:not(:disabled):active,
   .btn:active, .cart-cta:active, .co-confirm:active,
   .detail-add:not(:disabled):active, .tr-call:active,
-  .chip:active, .hdr-btn:active, .nav-item:active,
+  .chip:active, .hdr-btn:active, .hdr-help:active, .nav-item:active,
+  .ord-card:active, .acc-row:not(.soon):active,
   .qty-btn:not(:disabled):active { transform: scale(.99); }
 }
 
 /* ─── Cart ───
    Matches "Dental Supplies design html/cart.html" */
-.hdr.cart-hdr { height: 54px; padding: 0 16px; gap: 12px; border-bottom: 1px solid #E5E7EB; }
-.cart-hdr .hdr-title { color: #111827; font-size: 20px; font-weight: 700; }
-.cart-hdr .hdr-btn {
+.hdr.cart-hdr, .hdr.ord-hdr, .hdr.acc-hdr { height: 54px; padding: 0 16px; gap: 12px; border-bottom: 1px solid #E5E7EB; }
+.cart-hdr .hdr-title, .ord-hdr .hdr-title, .acc-hdr .hdr-title { color: #111827; font-size: 20px; font-weight: 700; }
+.cart-hdr .hdr-btn, .ord-hdr .hdr-btn, .acc-hdr .hdr-btn {
   width: 32px;
   height: 32px;
   background: #F3F4F6;
   border-radius: 8px;
   color: #111827;
 }
-.cart-hdr .hdr-btn:hover { background: #E5E7EB; }
-.cart-hdr .hdr-spacer { width: 36px; }
+.cart-hdr .hdr-btn:hover, .ord-hdr .hdr-btn:hover, .acc-hdr .hdr-btn:hover { background: #E5E7EB; }
+.cart-hdr .hdr-spacer, .ord-hdr .hdr-spacer, .acc-hdr .hdr-spacer { width: 36px; }
 
 .cart-main {
   padding: 12px 16px 24px;
@@ -1781,7 +1785,10 @@ body, .app, main { background: #fff; }
   border-radius: 20px;
   box-shadow: 0 8px 24px rgba(37, 99, 235, .08);
 }
-.login-intro { padding: 12px 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.login-intro { padding: 12px 0 20px; display: flex; flex-direction: column; gap: 8px; }
+/* headings and paragraphs keep their UA margins inside a flex column, which
+   stacks on top of the gap; zero them so `gap` is the only spacing */
+.login-head, .login-sub, .login-terms, .login-label, .acc-sec-title, .acc-ver, .ord-empty { margin: 0; }
 .login-lockup { display: flex; align-items: center; gap: 8px; }
 .login-lockup img { width: 36px; height: 36px; border-radius: 10px; }
 .login-brand { font-size: 24px; font-weight: 800; color: var(--pri); }
@@ -1838,32 +1845,14 @@ body, .app, main { background: #fff; }
    Order history — matches "Dental Supplies design html/orders.html"
 ══════════════════════════════════════════════ */
 .ord-main { flex: 1; min-height: 0; overflow-y: auto; padding: 12px 16px 16px; }
-.ord-search {
-  height: 48px; padding: 0 16px; background: var(--bg); border-radius: 24px;
-  display: flex; align-items: center; gap: 10px;
-  transition: outline-color .15s;
-  outline: 1px solid transparent; outline-offset: -1px;
-}
-.ord-search:focus-within { outline-color: var(--pri); }
-.ord-search .ord-search-ico { color: var(--mute-light); display: flex; flex: 0 0 auto; }
-.ord-search input {
-  flex: 1 1 0; min-width: 0; border: 0; outline: 0; background: transparent;
-  font: inherit; font-size: 14px; color: var(--ink);
-}
-.ord-search input::placeholder { color: var(--mute-light); }
-.ord-filters { display: flex; gap: 8px; padding: 12px 0 8px; flex-wrap: wrap; }
-.ord-filter {
-  padding: 6px 12px; background: var(--bg); border: 0; border-radius: var(--radius-sm);
-  font: inherit; font-size: 12px; font-weight: 600; color: var(--mute); cursor: pointer;
-  transition: background .15s, color .15s;
-}
-.ord-filter.on { background: var(--pri); color: #fff; font-weight: 700; padding: 6px 16px; }
 .ord-list { display: flex; flex-direction: column; gap: 12px; padding-top: 8px; }
 .ord-card {
   width: 100%; padding: 16px; background: var(--bg); border: 0;
   border-radius: var(--radius-md); font: inherit; text-align: right; cursor: pointer;
   display: flex; align-items: flex-start; gap: 16px;
+  transition: background .15s;
 }
+.ord-card:hover { background: #E9EBEF; }
 .ord-info { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .ord-sup { font-size: 16px; font-weight: 800; color: var(--ink); }
 .ord-money { display: flex; align-items: baseline; gap: 4px; }
@@ -1883,6 +1872,14 @@ body, .app, main { background: #fff; }
 /* ══════════════════════════════════════════════
    Account / settings — matches "Dental Supplies design html/my-account.html"
 ══════════════════════════════════════════════ */
+.hdr-help {
+  flex: 0 0 auto; width: 40px; height: 40px; border-radius: 10px;
+  background: var(--bg-white); color: var(--ink-sub);
+  outline: 1px solid var(--line); outline-offset: -1px; border: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; text-decoration: none;
+}
+.hdr-help:hover { background: var(--bg); }
 .acc-main { flex: 1; min-height: 0; overflow-y: auto; padding: 12px 20px 16px; }
 .acc-profile {
   padding: 20px; background: var(--bg-white); border-radius: var(--radius-md);
@@ -2014,7 +2011,7 @@ const SCL = ["bad","warn","good"];  // CSS class suffix
 const $   = n => "$" + n.toFixed(2);
 const esc = v => String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const S   = { screen:"login", q:"", cat:-1, pid:null, cart:[], sel:0, qty:1, pay:"cod", editAddr:false,
-              authed:false, ordQ:"", ordF:"all" };
+              authed:false, ordQ:"", ordF:"all", trackBack:"home" };
 /* signed-in clinic — demo data, matches "my-account.html" */
 const USER = { name:"د. أحمد محمد العلي", tel:"+963 944 123 456", version:"v2.4.1" };
 /* delivery address — demo data, matches the checkout design file */
@@ -2370,6 +2367,13 @@ function iconLogout(size=18) {
     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
   </svg>`;
 }
+function iconOrdersTab(size=22) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <polyline points="9 15 11 17 15 12"/>
+  </svg>`;
+}
 function iconUser(size=22) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -2431,7 +2435,7 @@ function bottomNav() {
       <span>الرئيسية</span>
     </button>
     <button class="nav-item ${on("orders")}" onclick="go('orders')" aria-label="الطلبات">
-      ${iconReceipt()}
+      ${iconOrdersTab()}
       <span>الطلبات</span>
     </button>
     <button class="nav-item ${on("cart")}" onclick="go('cart')" aria-label="السلة">
@@ -2921,8 +2925,9 @@ function placeOrder() {
     prepared:  t - 2 * 3600e3 - 27 * 60e3,
     shipped:   t - 8 * 60e3,
     eta:       t + 22 * 60e3,
-    driver: { name: "محمود الأنصاري", tel: "+963 944 318 275" }
+    driver: DRIVER
   };
+  S.trackBack = "home";
   const sups = [...new Set(S.cart.map(c => c.d))];
   ORDERS.unshift({
     id:    ORDER.id,
@@ -2936,6 +2941,7 @@ function placeOrder() {
   syncCartBadge();
 }
 
+const DRIVER = { name: "محمود الأنصاري", tel: "+963 944 318 275" };
 const AR_MONTHS = ["يناير","فبراير","مارس","أبريل","مايو","يونيو",
                    "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
 function fmtDay(ms) {
@@ -3033,7 +3039,7 @@ function screenTrack() {
   const initials = d.name.split(/\s+/).slice(0, 2).map(w => w.replace(/^ال/, "")[0]).join(" ");
   return `
   <header class="hdr tr-hdr" role="banner">
-    <button class="hdr-btn" onclick="go('home')" aria-label="العودة للرئيسية">${iconBack(22)}</button>
+    <button class="hdr-btn" onclick="go(S.trackBack)" aria-label="رجوع">${iconBack(22)}</button>
     <h1 class="hdr-title">تتبع الطلب</h1>
     <div class="hdr-spacer"></div>
   </header>
@@ -3116,8 +3122,8 @@ function screenLogin() {
     </form>
 
     <div class="login-trust">
-      <div class="login-pill safe">${iconShieldCheck(12)}اتصال آمن وموثق</div>
       <div class="login-pill fast">${iconBolt(12)}تجهيز فوري للطلبات</div>
+      <div class="login-pill safe">${iconShieldCheck(12)}اتصال آمن وموثق</div>
     </div>
 
     <p class="login-terms">
@@ -3187,7 +3193,8 @@ function ordMatch(o) {
 function ordCard(o) {
   const st = ORD_ST[o.st] || ORD_ST.proc;
   return `
-  <div class="ord-card" data-ord="${esc(o.id)}" ${ordMatch(o) ? "" : "hidden"}>
+  <button type="button" class="ord-card" data-ord="${esc(o.id)}"
+          onclick="openOrder('${esc(o.id)}')" ${ordMatch(o) ? "" : "hidden"}>
     <div class="ord-info">
       <div class="ord-sup">${esc(o.sup)}</div>
       <div class="ord-money">
@@ -3198,27 +3205,28 @@ function ordCard(o) {
       <div class="ord-id">${esc(o.id)}</div>
     </div>
     <span class="ord-badge ${st.k}">${st.t}</span>
-  </div>`;
+  </button>`;
 }
 
 function screenOrders() {
   const none = ORDERS.every(o => !ordMatch(o));
   return `
   <header class="hdr ord-hdr" role="banner">
-    <div class="hdr-spacer"></div>
+    <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack(22)}</button>
     <h1 class="hdr-title">سجل الطلبات</h1>
     <div class="hdr-spacer"></div>
   </header>
   <main class="ord-main">
-    <div class="ord-search">
-      <span class="ord-search-ico">${iconSearch(20)}</span>
-      <input id="ordQ" type="search" enterkeyhint="search"
-             placeholder="البحث برقم الطلب أو المورد..." value="${esc(S.ordQ)}"
-             aria-label="البحث في سجل الطلبات">
+    <div class="search-wrap">
+      <div class="search-icon" aria-hidden="true">${iconSearch()}</div>
+      <input
+        class="search" id="ordQ" type="search" enterkeyhint="search"
+        placeholder="البحث برقم الطلب أو المورد..." value="${esc(S.ordQ)}"
+        aria-label="البحث في سجل الطلبات">
     </div>
-    <div class="ord-filters" role="list" aria-label="تصفية حسب الحالة">
+    <div class="chips" role="list" aria-label="تصفية حسب الحالة">
       ${ORD_FILTERS.map(f => `
-        <button class="ord-filter ${S.ordF === f.id ? "on" : ""}" role="listitem"
+        <button class="chip ${S.ordF === f.id ? "on" : ""}" role="listitem"
                 data-ordf="${f.id}" onclick="setOrdFilter('${f.id}')">${f.t}</button>`).join("")}
     </div>
     <div class="ord-list" id="ordList">
@@ -3251,10 +3259,25 @@ function CSS_esc(v) {
 function setOrdFilter(id) {
   if (S.ordF === id) return;
   S.ordF = id;
-  document.querySelectorAll(".ord-filter").forEach(b => {
+  document.querySelectorAll(".chips .chip").forEach(b => {
     b.classList.toggle("on", b.getAttribute("data-ordf") === id);
   });
   applyOrdFilter();
+}
+
+/* Open a past order on the tracking screen. The tracker derives every step
+   from timestamps, so the status is expressed by placing them around now. */
+function openOrder(id) {
+  const o = ORDERS.find(x => x.id === id);
+  if (!o) return;
+  const t = Date.now(), H = 3600e3, M = 60e3;
+  const ts =
+    o.st === "done"   ? { received: t-52*H, prepared: t-50*H,   shipped: t-47*H, eta: t-45*H } :
+    o.st === "cancel" ? { received: t-9*H,  prepared: t+1*H,    shipped: t+2*H,  eta: t+3*H  } :
+                        { received: t-3*H-14*M, prepared: t-2*H-27*M, shipped: t-8*M, eta: t+22*M };
+  ORDER = { id: o.id, lines: o.items, total: o.total, driver: DRIVER, ...ts };
+  S.trackBack = "orders";
+  go("track");
 }
 
 /* ══════════════════════════════════════════════
@@ -3284,9 +3307,9 @@ function screenAccount() {
                      .map(w => w.replace(/^ال/, "")[0]).join(" ");
   return `
   <header class="hdr acc-hdr" role="banner">
-    <div class="hdr-spacer"></div>
+    <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack(22)}</button>
     <h1 class="hdr-title">الملف الشخصي</h1>
-    <div class="hdr-spacer"></div>
+    <a class="hdr-help" href="tel:+963115000000" aria-label="المساعدة والدعم">${iconSupport(20)}</a>
   </header>
   <main class="acc-main">
     <section class="acc-profile">
