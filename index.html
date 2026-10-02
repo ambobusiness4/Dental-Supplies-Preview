@@ -696,7 +696,9 @@ main {
 .offer-aside {
   display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
+  /* the ETA line is the widest child; flex-end is the LEFT edge under
+     dir="rtl", so the radio and price sit flush left beneath it */
+  align-items: flex-end;
   gap: 8px;
 }
 .offer-radio { display: flex; align-items: center; }
