@@ -52,7 +52,7 @@
 /* author display rules (.prod-card is flex) would otherwise beat the UA
    [hidden] rule, so make hiding explicit */
 [hidden] { display: none !important; }
-html, body { height: 100%; margin: 0; overflow: hidden; overscroll-behavior: none; }
+html, body { height: 100%; margin: 0; }
 
 body {
   background: var(--bg);
@@ -69,8 +69,6 @@ button { cursor: pointer; border: none; background: none; padding: 0; }
 .app {
   max-width: 430px;
   min-height: 100vh;
-  min-height: 100dvh;
-  max-height: 100dvh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -832,13 +830,16 @@ main {
 }
 .cart-ico { transform-origin: 50% 50%; will-change: transform; }
 .cart-pop { animation: cart-pop .55s cubic-bezier(.3, 1.4, .5, 1); }
-/* reduced motion still needs *some* confirmation, so swap the pop for a flash */
-@keyframes cart-flash {
-  0%, 100% { opacity: 1; }
-  35%      { opacity: .25; }
+/* Reduced motion gets a gentler bounce rather than none at all: no rotation,
+   a third of the travel, and a short fade so the feedback still reads. */
+@keyframes cart-soft {
+  0%   { transform: scale(1);    opacity: 1; }
+  35%  { transform: scale(1.12); opacity: .45; }
+  70%  { transform: scale(.98);  opacity: 1; }
+  100% { transform: scale(1);    opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cart-pop { animation: cart-flash .45s ease-in-out; }
+  .cart-pop { animation: cart-soft .42s ease-out; }
 }
 
 /* ─── Cart ───
@@ -1641,7 +1642,7 @@ body { background: #eef2f7; font-family: 'Cairo', Tahoma, sans-serif; }
 .hdr-logo { width: 32px; height: 32px; border-radius: 10px; overflow: hidden; background: var(--pri); }
 .hdr-logo img { width: 100%; height: 100%; object-fit: cover; }
 .hdr-btn { width: 40px; height: 40px; border-radius: 50%; background: #F3F4F6; }
-main { padding: 10px 24px 18px; background: var(--bg); }
+main { padding: 10px 24px 24px; background: var(--bg); }
 .search-wrap { margin: 0 0 16px; }
 .search { padding: 12px 42px 12px 14px; border: 0; border-radius: 10px; background: #F3F4F6; box-shadow: none; }
 .search:focus { background: #fff; }
@@ -1676,7 +1677,7 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 /* The reference screens are phone-sized, but the live demo should use a tablet viewport well. */
 @media (min-width: 600px) {
   body { background: #F8FAFC; }
-  .app { width: 100%; max-width: none; min-height: 100dvh; max-height: 100dvh; box-shadow: none; }
+  .app { width: 100%; max-width: none; min-height: 100vh; box-shadow: none; }
   .hdr { padding-inline: clamp(24px, 6vw, 72px); }
   main { padding-inline: clamp(24px, 6vw, 72px); }
   #l { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -1870,7 +1871,12 @@ const CART_POP = [
   { transform: "scale(1.1) rotate(-3deg)",   offset: .80 },
   { transform: "scale(1) rotate(0deg)" }
 ];
-const CART_FLASH = [{ opacity: 1 }, { opacity: .25, offset: .35 }, { opacity: 1 }];
+const CART_SOFT = [
+  { transform: "scale(1)",    opacity: 1 },
+  { transform: "scale(1.12)", opacity: .45, offset: .35 },
+  { transform: "scale(.98)",  opacity: 1,   offset: .70 },
+  { transform: "scale(1)",    opacity: 1 }
+];
 
 function prefersReducedMotion() {
   return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -1878,9 +1884,9 @@ function prefersReducedMotion() {
 
 function bumpCart() {
   const reduce = prefersReducedMotion();
-  const frames = reduce ? CART_FLASH : CART_POP;
+  const frames = reduce ? CART_SOFT : CART_POP;
   const opts   = reduce
-    ? { duration: 450, easing: "ease-in-out" }
+    ? { duration: 420, easing: "ease-out" }
     : { duration: 550, easing: "cubic-bezier(.3, 1.4, .5, 1)" };
 
   document.querySelectorAll(".cart-ico").forEach(el => {
