@@ -2353,8 +2353,11 @@ function iconChevronL(size=18) {
   </svg>`;
 }
 function iconClinic(size=18) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M12 9v4"/><path d="M10 11h4"/>
+  /* the building from "my-account.html", path verbatim on its native 18x18 box.
+     The design strokes it at 2, which renders heavier than the other rows'
+     icons at this size, so it is 1.5 to sit level with them. */
+  return `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M8.99989 7.49988H9.00739M8.99989 10.5001H9.00739M8.99989 4.49964H9.00739M11.9996 7.49988H12.0071M11.9996 10.5001H12.0071M11.9996 4.49964H12.0071M6.00019 7.49988H6.00769M6.00019 10.5001H6.00769M6.00019 4.49964H6.00769M6.75011 16.5006V14.2504C6.75011 14.0515 6.82912 13.8607 6.96976 13.72C7.1104 13.5794 7.30115 13.5004 7.50004 13.5004H10.4997C10.6986 13.5004 10.8894 13.5794 11.03 13.72C11.1707 13.8607 11.2497 14.0515 11.2497 14.2504V16.5006M4.50034 1.4994H13.4994C14.3278 1.4994 14.9993 2.17102 14.9993 2.99952V15.0005C14.9993 15.829 14.3278 16.5006 13.4994 16.5006H4.50034C3.67199 16.5006 3.00049 15.829 3.00049 15.0005V2.99952C3.00049 2.17102 3.67199 1.4994 4.50034 1.4994Z"/>
   </svg>`;
 }
 function iconBell(size=18) {
