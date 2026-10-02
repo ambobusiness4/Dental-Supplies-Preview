@@ -1091,85 +1091,261 @@ main {
 }
 .summary-total .val { color: #111827; direction: ltr; }
 
-/* ─── Checkout ─── */
-.form-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 6px;
+/* ─── Checkout ───
+   Matches "Dental Supplies design html/checkout.html" */
+.hdr.co-hdr { height: 54px; padding: 0 16px; gap: 12px; border-bottom: 1px solid #E5E7EB; }
+.co-hdr .hdr-title { color: #111827; font-size: 20px; font-weight: 700; }
+.co-hdr .hdr-btn {
+  width: 32px;
+  height: 32px;
+  background: #F3F4F6;
+  border-radius: 8px;
+  color: #111827;
+  flex: none;
+}
+.co-hdr .hdr-btn:hover { background: #E5E7EB; }
+.co-hdr .hdr-spacer { width: 36px; }
+
+.co-main {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #fff;
+}
+
+/* address card */
+.co-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, .05);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.co-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.co-card-head-title {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
 }
-.form-input {
+.co-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #EFF6FF;
+  color: #2563EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.co-edit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  color: #2563EB;
+}
+.co-edit svg { display: block; }
+.co-addr {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.co-addr-name {
+  align-self: stretch;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+.co-addr-line {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #6B7280;
+}
+.co-addr-line span { flex: 1; text-align: right; }
+.co-addr-line svg { flex: none; display: block; }
+.co-addr-tel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6B7280;
+  direction: ltr;
+  flex-direction: row-reverse;
+}
+.co-addr-tel svg { flex: none; display: block; }
+.co-addr .form-input {
   width: 100%;
-  padding: 11px 12px;
-  border-radius: var(--radius-sm);
-  border: 1.5px solid var(--line);
-  background: var(--bg);
-  font-size: 14px;
-  color: var(--ink);
-  transition: border-color .15s;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #E5E7EB;
+  background: #F9FAFB;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: #111827;
+  text-align: right;
 }
-.form-input:focus {
-  outline: none;
-  border-color: var(--pri);
-  background: var(--bg-white);
+.co-addr .form-input:focus { outline: none; border-color: #2563EB; background: #fff; }
+
+/* payment method picker */
+.co-sect {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-.pay-option {
+.co-sect-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+.co-sect-title svg { color: #2563EB; flex: none; display: block; }
+.pay-opt {
+  width: 100%;
+  min-height: 70px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #E5E7EB;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--pri);
-  background: var(--pri-soft);
+  text-align: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
 }
-.pay-radio {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid var(--pri);
-  background: #fff;
-  flex: none;
-  display: grid;
-  place-items: center;
+.pay-opt.sel {
+  background: #EFF6FF;
+  border: 2px solid #2563EB;
+  padding: 11px;
 }
-.pay-radio-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--pri);
-}
-.pay-info { flex: 1; }
-.pay-name {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-}
-.pay-desc {
-  font-size: 11px;
-  color: var(--mute);
-  margin-top: 2px;
-}
+.pay-opt:disabled { opacity: .72; cursor: not-allowed; }
 .pay-icon-box {
   width: 42px;
   height: 42px;
   border-radius: 10px;
-  background: var(--pri);
-  display: grid;
-  place-items: center;
+  background: #F8FAFC;
+  color: #2563EB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: none;
-  color: #fff;
 }
-.selected-tag {
+.pay-opt.sel .pay-icon-box { background: #2563EB; color: #fff; }
+.pay-opt:disabled .pay-icon-box { color: #6B7280; }
+.pay-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.pay-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pay-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+}
+.pay-opt:disabled .pay-name { color: #6B7280; }
+.pay-tag {
   font-size: 10px;
   font-weight: 700;
-  padding: 2px 8px;
+  padding: 2px 6px;
   border-radius: 999px;
-  background: var(--good-bg);
-  color: var(--good);
+  background: #ECFDF5;
+  color: #10B981;
 }
+.pay-desc {
+  align-self: stretch;
+  text-align: right;
+  font-size: 10px;
+  font-weight: 500;
+  color: #6B7280;
+}
+.pay-desc.warn { color: #EF4444; }
+.pay-radio { flex: none; display: flex; }
+.pay-radio svg { display: block; }
+
+/* order total card */
+.co-tot-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.co-tot-label { font-size: 13px; font-weight: 700; color: #111827; }
+.co-tot-meta  { font-size: 10px; font-weight: 600; color: #6B7280; }
+.co-tot-big   { font-size: 15px; font-weight: 700; color: #111827; }
+.co-tot-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #10B981;
+}
+.co-tot-note svg { flex: none; display: block; }
+
+/* sticky confirm bar */
+.co-bar {
+  padding: 12px 16px 20px;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  background: #fff;
+  box-shadow: 0 -3px 12px rgba(15, 23, 42, .07);
+}
+.co-confirm {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  background: #2563EB;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.co-confirm:active { background: #1D4ED8; }
+.co-confirm svg { flex: none; display: block; }
 
 /* ─── Order Confirmation / Tracking ─── */
 .success-wrap {
@@ -1413,7 +1589,19 @@ const prods = P.map((p,i) => ({
 const ST  = ["غير متوفر","كمية محدودة","متوفر"];
 const SCL = ["bad","warn","good"];  // CSS class suffix
 const $   = n => "$" + n.toFixed(2);
-const S   = { screen:"home", q:"", cat:-1, pid:null, cart:[], sel:0, qty:1 };
+const esc = v => String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const S   = { screen:"home", q:"", cat:-1, pid:null, cart:[], sel:0, qty:1, pay:"cod", editAddr:false };
+/* delivery address — demo data, matches the checkout design file */
+const ADDR = {
+  name: "عيادة سما لطب الأسنان",
+  line: "دمشق، المزة – أوتستراد، بناء 24، الطابق الثاني",
+  tel:  "+963 944 123 456"
+};
+const PAYS = [
+  { id:"cod",    name:"الدفع عند الاستلام",  desc:"ادفع نقداً عند وصول الطلب",  icon:iconCash },
+  { id:"sham",   name:"شام كاش",             desc:"الدفع الآمن من حساب شام كاش", icon:iconWalletCard },
+  { id:"wallet", name:"محفظة التطبيق - الرصيد: " + $(0), desc:"الرصيد غير كافٍ لإتمام الدفع", icon:iconMobile, off:true }
+];
 const min = p => Math.min(...p.offers.filter(o=>o.stock>0).map(o=>o.price));
 const cnt = () => S.cart.reduce((a,c) => a+c.qty, 0);
 const sub = () => S.cart.reduce((a,c) => a+c.qty*c.price, 0);
@@ -1534,6 +1722,68 @@ function iconCheck(size=16, color="white") {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <polyline points="20 6 9 17 4 12"/>
   </svg>`;
+}
+/* ── checkout.html icons ── */
+function iconPencil(size=13) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M8.12518 2.70786L10.292 4.87449M11.4697 3.68955C11.7561 3.40324 11.917 3.0149 11.9171 2.60994C11.9171 2.20499 11.7563 1.81661 11.47 1.53023C11.1836 1.24385 10.7952 1.08294 10.3902 1.08289C9.98525 1.08283 9.59683 1.24365 9.31042 1.52996L2.08069 8.76054C1.95491 8.88594 1.8619 9.04033 1.80983 9.21012L1.09423 11.5674C1.08023 11.6143 1.07917 11.664 1.09117 11.7114C1.10316 11.7588 1.12777 11.8021 1.16237 11.8366C1.19697 11.8712 1.24028 11.8957 1.2877 11.9076C1.33512 11.9195 1.38489 11.9184 1.43171 11.9043L3.7898 11.1893C3.95945 11.1377 4.11384 11.0453 4.23942 10.9201L11.4697 3.68955Z"/>
+  </svg>`;
+}
+function iconPin(size=16) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M8.40066 14.5333C9.64054 13.4626 13.3328 9.99559 13.3328 6.66662C13.3328 5.252 12.771 3.89532 11.7709 2.89504C10.7708 1.89475 9.41438 1.33279 8.00004 1.33279C6.58569 1.33279 5.22927 1.89475 4.22918 2.89504C3.22908 3.89532 2.66724 5.252 2.66724 6.66662C2.66724 9.99559 6.35953 13.4626 7.59941 14.5333C7.71492 14.6202 7.85552 14.6672 8.00004 14.6672C8.14455 14.6672 8.28516 14.6202 8.40066 14.5333Z"/>
+  </svg>`;
+}
+function iconSend(size=14) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M12.8333 1.1662L1.75 6.4162L6.41667 7.58287L7.58333 12.2495L12.8333 1.1662Z"/>
+  </svg>`;
+}
+function iconPhone(size=14) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M8.45366 9.70072C8.32503 9.73285 8.1893 9.72021 8.06881 9.66488C6.44843 8.86961 5.13714 7.55997 4.33985 5.94058C4.2808 5.81946 4.2655 5.68163 4.29656 5.5505C4.32761 5.41938 4.4031 5.30305 4.51019 5.22127L4.78322 5.01651C4.92812 4.90783 5.04574 4.7669 5.12674 4.60489C5.20775 4.44288 5.24992 4.26423 5.24992 4.0831V2.33296C5.24992 2.02351 5.12699 1.72674 4.90818 1.50793C4.68937 1.28912 4.3926 1.1662 4.08316 1.1662H2.33302C2.02358 1.1662 1.72681 1.28912 1.508 1.50793C1.28919 1.72674 1.16626 2.02351 1.16626 2.33296C1.16626 5.11795 2.2726 7.78889 4.24188 9.75817C6.21117 11.7275 8.8821 12.8338 11.6671 12.8338C11.9765 12.8338 12.2733 12.7109 12.4921 12.4921C12.7109 12.2733 12.8339 11.9765 12.8339 11.667V9.9169C12.8339 9.60746 12.7109 9.31069 12.4921 9.09188C12.2733 8.87307 11.9765 8.75014 11.6671 8.75014H9.91696C9.73583 8.75014 9.55718 8.79231 9.39517 8.87332C9.23316 8.95432 9.09223 9.07194 8.98355 9.21684L8.77645 9.48811C8.69614 9.5936 8.58229 9.66859 8.45366 9.70072Z"/>
+  </svg>`;
+}
+function iconCardSm(size=17) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M1.41614 7.08318H15.5839M2.83292 3.54111H14.1672C14.9496 3.54111 15.5839 4.17544 15.5839 4.95794V12.0421C15.5839 12.8246 14.9496 13.4589 14.1672 13.4589H2.83292C2.05045 13.4589 1.41614 12.8246 1.41614 12.0421V4.95794C1.41614 4.17544 2.05045 3.54111 2.83292 3.54111Z"/>
+  </svg>`;
+}
+function iconCash(size=21) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 21 21" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M5.24955 10.5H5.2583M15.7504 10.5H15.7591M3.49941 5.25H17.5005C18.4671 5.25 19.2507 6.0335 19.2507 7V14C19.2507 14.9665 18.4671 15.75 17.5005 15.75H3.49941C2.53283 15.75 1.74927 14.9665 1.74927 14V7C1.74927 6.0335 2.53283 5.25 3.49941 5.25ZM12.2501 10.5C12.2501 11.4665 11.4665 12.25 10.5 12.25C9.53339 12.25 8.74983 11.4665 8.74983 10.5C8.74983 9.5335 9.53339 8.75 10.5 8.75C11.4665 8.75 12.2501 9.5335 12.2501 10.5Z"/>
+  </svg>`;
+}
+function iconWalletCard(size=21) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 21 21" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M2.625 7.875C2.625 7.41087 2.80937 6.96575 3.13756 6.63756C3.46575 6.30937 3.91087 6.125 4.375 6.125H16.625C17.0891 6.125 17.5342 6.30937 17.8624 6.63756C18.1906 6.96575 18.375 7.41087 18.375 7.875M2.625 9.625H5.25C5.95 9.625 6.65 9.8875 7.0875 10.4125L8.05 11.2C9.45 12.6 11.6375 12.6 13.0375 11.2L14 10.4125C14.4375 9.975 15.1375 9.625 15.8375 9.625H18.375M4.375 2.625H16.625C17.5915 2.625 18.375 3.4085 18.375 4.375V16.625C18.375 17.5915 17.5915 18.375 16.625 18.375H4.375C3.4085 18.375 2.625 17.5915 2.625 16.625V4.375C2.625 3.4085 3.4085 2.625 4.375 2.625Z"/>
+  </svg>`;
+}
+function iconMobile(size=21) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 21 21" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M10.5 15.7504H10.5087M6.12447 1.7493H14.8755C15.8421 1.7493 16.6257 2.53286 16.6257 3.49944V17.5006C16.6257 18.4671 15.8421 19.2507 14.8755 19.2507H6.12447C5.15786 19.2507 4.37427 18.4671 4.37427 17.5006V3.49944C4.37427 2.53286 5.15786 1.7493 6.12447 1.7493Z"/>
+  </svg>`;
+}
+function iconShieldCheck(size=14) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M5.25012 6.99972L6.41666 8.16643L8.74976 5.83302M11.6661 7.58334C11.6661 10.5001 9.62468 11.9585 7.19825 12.8043C7.07119 12.8474 6.93318 12.8453 6.80746 12.7985C4.3752 11.9585 2.33374 10.5001 2.33374 7.58334V3.49987C2.33374 3.34516 2.39519 3.19678 2.50458 3.08738C2.61396 2.97798 2.76232 2.91652 2.91702 2.91652C4.08357 2.91652 5.54175 2.21649 6.55665 1.3298C6.68022 1.22421 6.83741 1.1662 6.99994 1.1662C7.16247 1.1662 7.31966 1.22421 7.44323 1.3298C8.46396 2.22233 9.91631 2.91652 11.0829 2.91652C11.2376 2.91652 11.3859 2.97798 11.4953 3.08738C11.6047 3.19678 11.6661 3.34516 11.6661 3.49987V7.58334Z"/>
+  </svg>`;
+}
+function iconCheckLg(size=18) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
+    <path d="M14.9994 4.5L6.75024 12.7494L3.00061 8.99967"/>
+  </svg>`;
+}
+function iconPayRadio(on) {
+  return on
+    ? `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+         <rect x="1" y="1" width="18" height="18" rx="9" fill="white"/>
+         <rect x="1" y="1" width="18" height="18" rx="9" stroke="#2563EB" stroke-width="2"/>
+         <circle cx="10" cy="10" r="5" fill="#2563EB"/>
+       </svg>`
+    : `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+         <circle cx="10" cy="10" r="9" fill="white" stroke="#E5E7EB" stroke-width="2"/>
+       </svg>`;
 }
 /* ── cart.html icons ── */
 function iconStoreSm(size=15) {
@@ -1929,65 +2179,112 @@ function patchCart() {
 /* ── Checkout ── */
 function screenCheckout() {
   return `
-  <header class="hdr" role="banner">
+  <header class="hdr co-hdr" role="banner">
     <button class="hdr-btn" onclick="go('cart')" aria-label="رجوع">${iconBack()}</button>
-    <h1 class="hdr-title">إتمام الطلب</h1>
+    <h1 class="hdr-title">الدفع</h1>
     <div class="hdr-spacer"></div>
   </header>
-  <main>
-    <div class="card">
-      <div class="card-title">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pri)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        عنوان العيادة
+  <main class="co-main">
+    <section class="co-card" id="addrCard">${addrCardBody()}</section>
+
+    <section class="co-sect">
+      <h2 class="co-sect-title">${iconCardSm()}اختر طريقة الدفع</h2>
+      <div id="payList" class="co-sect">${payList()}</div>
+    </section>
+
+    <section class="co-card">
+      <div class="co-tot-row">
+        <span class="co-tot-label">إجمالي الطلب</span>
+        <span class="co-tot-meta">${countLabel()}</span>
       </div>
-      <input
-        class="form-input"
-        value="عيادة د. سامر – عمّان، الدوار السابع، مبنى 12، الطابق 2"
-        aria-label="عنوان العيادة">
-    </div>
-    <div class="card">
-      <div class="card-title">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pri)" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        طريقة الدفع
+      <div class="co-tot-row">
+        <span class="co-tot-big">المجموع مع التوصيل</span>
+        <span class="co-tot-big">${$(sub()+fee())}</span>
       </div>
-      <div class="pay-option" role="radio" aria-checked="true">
-        <div class="pay-radio">
-          <div class="pay-radio-dot"></div>
-        </div>
-        <div class="pay-info">
-          <div class="pay-name">
-            الدفع عند الاستلام
-            <span class="selected-tag" style="margin-inline-start:6px">محدد</span>
-          </div>
-          <div class="pay-desc">ادفع نقداً عند وصول الطلب (Cash on Delivery)</div>
-        </div>
-        <div class="pay-icon-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg>
-        </div>
-      </div>
-    </div>
-    <div class="summary-card">
-      <div class="summary-row">
-        <span class="label">المجموع الفرعي</span>
-        <span class="val">${$(sub())}</span>
-      </div>
-      <div class="summary-row">
-        <span class="label">رسوم التوصيل</span>
-        <span class="val">${$(fee())}</span>
-      </div>
-      <hr class="summary-divider">
-      <div class="summary-total">
-        <span>الإجمالي</span>
-        <span class="val">${$(sub()+fee())}</span>
-      </div>
-    </div>
+      <p class="co-tot-note">${iconShieldCheck()}يمكنك مراجعة الطلب قبل التأكيد</p>
+    </section>
   </main>
-  <div class="footer-bar">
-    <button class="btn full" onclick="go('done')" aria-label="تأكيد الطلب">تأكيد الطلب</button>
+  <div class="co-bar">
+    <button class="co-confirm" onclick="go('done')">${iconCheckLg()}تأكيد الطلب</button>
   </div>`;
 }
 
-/* ── Order Confirmation ── */
+/* "3 منتجات • موزّعان" */
+function countLabel() {
+  const n = S.cart.length;
+  const d = new Set(S.cart.map(c => c.d)).size;
+  const nTxt = n === 1 ? "منتج واحد" : n === 2 ? "منتجان" : n <= 10 ? n + " منتجات" : n + " منتجاً";
+  const dTxt = d === 1 ? "موزّع واحد" : d === 2 ? "موزّعان" : d + " موزّعين";
+  return nTxt + " • " + dTxt;
+}
+
+function addrCardBody() {
+  const head = `
+  <div class="co-card-head">
+    <div class="co-card-head-title">
+      <span class="co-badge">${iconPin()}</span>
+      تأكيد عنوان التوصيل
+    </div>
+    <button class="co-edit" onclick="toggleAddr()">
+      ${iconPencil()}${S.editAddr ? "حفظ" : "تعديل"}
+    </button>
+  </div>`;
+
+  if (S.editAddr) {
+    return head + `
+    <div class="co-addr">
+      <input class="form-input" id="aName" value="${esc(ADDR.name)}" aria-label="اسم العيادة">
+      <input class="form-input" id="aLine" value="${esc(ADDR.line)}" aria-label="العنوان">
+      <input class="form-input" id="aTel"  value="${esc(ADDR.tel)}"  aria-label="رقم الهاتف" dir="ltr">
+    </div>`;
+  }
+
+  return head + `
+  <div class="co-addr">
+    <div class="co-addr-name">${esc(ADDR.name)}</div>
+    <div class="co-addr-line">${iconSend()}<span>${esc(ADDR.line)}</span></div>
+    <div class="co-addr-tel">${iconPhone()}${esc(ADDR.tel)}</div>
+  </div>`;
+}
+
+function toggleAddr() {
+  if (S.editAddr) {
+    const g = id => (document.getElementById(id) || {}).value;
+    if (g("aName") != null) { ADDR.name = g("aName").trim() || ADDR.name; }
+    if (g("aLine") != null) { ADDR.line = g("aLine").trim() || ADDR.line; }
+    if (g("aTel")  != null) { ADDR.tel  = g("aTel").trim()  || ADDR.tel;  }
+  }
+  S.editAddr = !S.editAddr;
+  const c = document.getElementById("addrCard");
+  if (c) c.innerHTML = addrCardBody();
+}
+
+function payList() {
+  return PAYS.map(m => {
+    const on = S.pay === m.id;
+    return `
+    <button class="pay-opt${on ? " sel" : ""}" role="radio" aria-checked="${on}"
+            ${m.off ? "disabled" : `onclick="setPay('${m.id}')"`}>
+      <span class="pay-icon-box">${m.icon()}</span>
+      <span class="pay-info">
+        <span class="pay-name-row">
+          <span class="pay-name">${m.name}</span>
+          ${on ? `<span class="pay-tag">محدد</span>` : ""}
+        </span>
+        <span class="pay-desc${m.off ? " warn" : ""}">${m.desc}</span>
+      </span>
+      <span class="pay-radio">${iconPayRadio(on)}</span>
+    </button>`;
+  }).join("");
+}
+
+function setPay(id) {
+  if (S.pay === id) return;
+  S.pay = id;
+  const l = document.getElementById("payList");
+  if (l) l.innerHTML = payList();
+}
+
 function screenDone() {
   const steps = [
     { label:"تم استلام الطلب بواسطة الموردين", done: true,  active: false },
