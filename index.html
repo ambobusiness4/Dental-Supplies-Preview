@@ -497,18 +497,18 @@ main {
 .hdr.detail-hdr { border-bottom: 1px solid #E2E8F0; }
 .detail-hdr .hdr-title { color: #0F172A; font-size: 20px; font-weight: 700; }
 .detail-hdr .hdr-btn {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   background: #F3F4F6;
   border-radius: 8px;
   color: #0F172A;
 }
 .detail-hdr .hdr-btn:hover { background: #E5E7EB; }
-/* same 40px box as the back button so the title stays centred,
+/* same 32px box as the back button so the title stays centred,
    but no filled container of its own */
 .detail-hdr .hdr-share {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   background: transparent;
   border-radius: 8px;
   color: #0F172A;
@@ -2032,8 +2032,8 @@ function iconRadio(on, dim) {
     ${on ? `<circle cx="10" cy="10" r="5" fill="#10B981"/>` : ""}
   </svg>`;
 }
-function iconShare(size=18) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+function iconShare(size=20) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
     <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/>
   </svg>`;
@@ -2169,9 +2169,9 @@ function screenDetail() {
   const canBuy = !!(sel && sel.stock);
   return `
   <header class="hdr detail-hdr" role="banner">
-    <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack()}</button>
+    <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack(22)}</button>
     <h1 class="hdr-title">تفاصيل المنتج</h1>
-    <button class="hdr-btn hdr-share" aria-label="مشاركة">${iconShare()}</button>
+    <button class="hdr-btn hdr-share" aria-label="مشاركة">${iconShare(20)}</button>
   </header>
   <main class="detail-main">
     <div class="detail-hero">
