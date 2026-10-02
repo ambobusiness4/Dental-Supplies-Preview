@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>عيادتي</title>
 <meta name="description" content="تطبيق طلب مستلزمات الأسنان – قارن الأسعار بين الموردين وأضف للسلة بسهولة">
 <meta name="theme-color" content="#2563EB">
@@ -1706,7 +1706,15 @@ main { padding: 10px 24px 24px; background: var(--bg); }
 .chip { padding: 7px 13px; border: 0; background: #F3F4F6; color: var(--ink-sub); border-radius: 7px; font-size: 12px; font-weight: 600; }
 .chip.on { background: var(--pri); box-shadow: none; }
 #l { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.nav { height: 68px; padding: 10px 24px 0; border-top: 1px solid var(--line); justify-content: space-around; }
+.nav {
+  min-height: 68px;
+  height: auto;
+  padding: 10px 24px 0;
+  /* must come after the shorthand above or it is silently dropped */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  border-top: 1px solid var(--line);
+  justify-content: space-around;
+}
 .nav-item { flex: 0 0 70px; padding: 0; gap: 4px; font-size: 11px; font-weight: 500; }
 .nav-item.active { color: var(--pri); font-weight: 700; }
 .nav-item svg { width: 22px; height: 22px; }
