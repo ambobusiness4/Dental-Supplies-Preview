@@ -483,12 +483,6 @@ main {
 }
 .btn.ghost:hover { background: var(--line); }
 .btn.full { width: 100%; padding: 14px; font-size: 16px; border-radius: var(--radius-md); }
-.btn.success-ghost {
-  background: var(--bg);
-  color: var(--ink-sub);
-  box-shadow: none;
-  border: 1.5px solid var(--line);
-}
 
 /* ─── Footer action bar ─── */
 .footer-bar {
@@ -1611,97 +1605,6 @@ main {
 .tr-support svg { color: #2563EB; flex: none; display: block; }
 
 /* ─── Order Confirmation / Tracking ─── */
-.success-wrap {
-  text-align: center;
-  padding: 20px 0 10px;
-}
-.success-circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: var(--good-bg);
-  display: grid;
-  place-items: center;
-  margin: 0 auto 14px;
-  border: 3px solid #fff;
-  box-shadow: 0 4px 16px rgba(16,185,129,.25);
-}
-.success-h {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--ink);
-  margin: 0 0 6px;
-}
-.success-sub {
-  font-size: 13px;
-  color: var(--mute);
-  margin: 0 0 20px;
-}
-
-/* Timeline */
-.timeline { position: relative; }
-.tl-step {
-  display: flex;
-  gap: 12px;
-  padding-bottom: 0;
-  position: relative;
-}
-.tl-step:not(:last-child) { padding-bottom: 0; }
-.tl-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: none;
-  width: 30px;
-}
-.tl-dot {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  flex: none;
-  z-index: 1;
-  font-size: 13px;
-  font-weight: 700;
-}
-.tl-dot.done {
-  background: var(--good);
-  color: #fff;
-}
-.tl-dot.active {
-  background: var(--pri);
-  color: #fff;
-  outline: 4px solid var(--pri-border);
-  outline-offset: -4px;
-}
-.tl-dot.pending {
-  background: var(--bg);
-  color: var(--mute);
-  border: 2px solid var(--line);
-}
-.tl-line {
-  width: 2px;
-  flex: 1;
-  min-height: 28px;
-  margin: 2px 0;
-  border-radius: 1px;
-}
-.tl-line.done  { background: var(--good); }
-.tl-line.pending { background: var(--line); }
-
-.tl-body {
-  flex: 1;
-  padding-top: 4px;
-  padding-bottom: 20px;
-}
-.tl-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.4;
-}
-.tl-title.pending { color: var(--mute); }
 
 /* ─── MVP visual language from the design screens ─── */
 :root {
@@ -1979,11 +1882,6 @@ function iconSearch(size=18) {
 function iconBack(size = 18) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M6.75 13.5L11.25 9L6.75 4.5"/>
-  </svg>`;
-}
-function iconCheck(size=16, color="white") {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="20 6 9 17 4 12"/>
   </svg>`;
 }
 /* ── track-order.html icons ── */
@@ -2510,7 +2408,7 @@ function screenCheckout() {
     </section>
   </main>
   <div class="co-bar">
-    <button class="co-confirm" onclick="placeOrder();go('done')">${iconCheckLg()}تأكيد الطلب</button>
+    <button class="co-confirm" onclick="placeOrder();go('track')">${iconCheckLg()}تأكيد الطلب</button>
   </div>`;
 }
 
@@ -2605,6 +2503,8 @@ function placeOrder() {
     eta:       t + 22 * 60e3,
     driver: { name: "محمود الأنصاري", tel: "+963 944 318 275" }
   };
+  S.cart = [];
+  syncCartBadge();
 }
 
 const AR_MER = h => (h < 12 ? "ص" : "م");
@@ -2697,7 +2597,7 @@ function screenTrack() {
   const initials = d.name.split(/\s+/).slice(0, 2).map(w => w.replace(/^ال/, "")[0]).join(" ");
   return `
   <header class="hdr tr-hdr" role="banner">
-    <button class="hdr-btn" onclick="go('done')" aria-label="رجوع">${iconBack(22)}</button>
+    <button class="hdr-btn" onclick="go('home')" aria-label="العودة للرئيسية">${iconBack(22)}</button>
     <h1 class="hdr-title">تتبع الطلب</h1>
     <div class="hdr-spacer"></div>
   </header>
@@ -2747,67 +2647,6 @@ function patchTrack() {
 }
 setInterval(patchTrack, 30e3);
 
-function screenDone() {
-  const steps = [
-    { label:"تم استلام الطلب بواسطة الموردين", done: true,  active: false },
-    { label:"جاري تجهيز الشحنة والتغليف",       done: true,  active: false },
-    { label:"السائق في الطريق إلى العيادة",       done: false, active: false }
-  ];
-  const tlHTML = steps.map((s, i) => {
-    const isLast = i === steps.length - 1;
-    const dotClass = s.done ? "done" : (s.active ? "active" : "pending");
-    const lineClass = s.done ? "done" : "pending";
-    const titleClass = (!s.done && !s.active) ? "pending" : "";
-    return `
-    <div class="tl-step">
-      <div class="tl-col">
-        <div class="tl-dot ${dotClass}" aria-label="${s.done?'مكتمل':'في الانتظار'}">
-          ${s.done ? iconCheck(14) : (s.active ? iconCheck(14) : "")}
-        </div>
-        ${!isLast ? `<div class="tl-line ${lineClass}"></div>` : ""}
-      </div>
-      <div class="tl-body">
-        <div class="tl-title ${titleClass}">${s.label}</div>
-      </div>
-    </div>`;
-  }).join("");
-
-  return `
-  <header class="hdr" role="banner">
-    <div class="hdr-spacer"></div>
-    <h1 class="hdr-title">تأكيد الطلب والمتابعة</h1>
-    <div class="hdr-spacer"></div>
-  </header>
-  <main>
-    <div class="success-wrap">
-      <div class="success-circle" aria-label="تم تأكيد الطلب بنجاح">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-      </div>
-      <h2 class="success-h">تم استلام طلبك بنجاح</h2>
-      <p class="success-sub">سيتواصل معك الموردون قريباً</p>
-    </div>
-    <div class="card">
-      <div class="card-title">حالة التوصيل</div>
-      <div class="timeline" role="list" aria-label="مراحل الطلب">
-        ${tlHTML}
-      </div>
-    </div>
-  </main>
-  <div class="footer-bar" style="display:flex;flex-direction:column;gap:8px">
-    <button class="co-confirm" onclick="go('track')" aria-label="تتبع الطلب">
-      ${iconTruckSm(18)}تتبع الطلب
-    </button>
-    <button
-      class="btn full success-ghost"
-      onclick="S.cart=[];S.q='';S.cat=-1;go('home')"
-      aria-label="بدء طلب جديد">
-      طلب جديد
-    </button>
-  </div>`;
-}
-
 /* ══════════════════════════════════════════════
    RENDER
 ══════════════════════════════════════════════ */
@@ -2821,7 +2660,7 @@ function render(keep) {
   else if (S.screen === "cart")     h = screenCart();
   else if (S.screen === "checkout") h = screenCheckout();
   else if (S.screen === "track")    h = screenTrack();
-  else                               h = screenDone();
+  else                               h = screenHome();
 
   a.innerHTML = h;
 
