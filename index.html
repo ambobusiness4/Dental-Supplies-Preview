@@ -495,90 +495,319 @@ main {
   border-top: 1px solid var(--line);
 }
 
-/* ─── Detail screen ─── */
-.detail-hero {
-  background: var(--bg);
-  border-radius: var(--radius-lg);
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 16px;
-  border: 1px solid var(--line);
+/* ─── Detail screen ───
+   Matches "Dental Supplies design html/product-details.html" */
+.detail-hdr { border-bottom-color: #E2E8F0; }
+.detail-hdr .hdr-title { color: #0F172A; font-size: 20px; font-weight: 700; }
+.detail-hdr .hdr-btn { width: 40px; height: 40px; background: transparent; color: #0F172A; }
+.detail-hdr .hdr-btn:hover { background: #F3F4F6; }
+.detail-hdr .hdr-share {
+  width: 32px;
+  height: 32px;
+  background: #F3F4F6;
+  border-radius: 8px;
+  color: #111827;
 }
-.detail-hero-icon {
-  width: 90px;
-  height: 90px;
-  border-radius: var(--radius-lg);
-  background: var(--pri-soft);
-  display: grid;
-  place-items: center;
-  font-size: 44px;
-  font-weight: 800;
-  color: var(--pri);
-  margin: 0 auto 12px;
-}
-.detail-hero-name {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--ink);
-}
-.detail-hero-spec {
-  font-size: 13px;
-  color: var(--mute);
-  margin-top: 6px;
-  line-height: 1.6;
+.detail-main {
+  padding: 16px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-.offer-card {
-  background: var(--bg-white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 14px;
-  margin-bottom: 10px;
-  box-shadow: var(--shadow-md);
-  transition: box-shadow .15s;
-}
-.offer-card.best {
-  border-color: var(--pri-border);
-  background: var(--pri-soft);
-}
-.offer-header {
+/* Framed product image */
+.detail-hero {
+  align-self: stretch;
+  height: 240px;
+  padding: 16px;
+  margin: 0;
+  background: #fff;
+  border: 0;
+  outline: 1px solid #E2E8F0;
+  outline-offset: -1px;
+  border-radius: 12px;
+  box-shadow: none;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
 }
-.offer-name {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--ink);
+.detail-hero-icon {
+  flex: 1 1 0;
+  align-self: stretch;
+  width: auto;
+  height: auto;
+  margin: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: transparent;
 }
-.best-badge {
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: var(--good-bg);
-  color: var(--good);
-}
-.offer-row {
+.detail-hero-icon img { border-radius: 8px; }
+
+/* Title block: category pill + name, then the spec line */
+.detail-head {
+  align-self: stretch;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 10px;
 }
-.offer-price {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--ink);
-  direction: ltr;
+.detail-title-row {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 8px;
 }
-.offer-stk {
+.detail-cat-pill {
+  padding: 4px 10px;
+  background: #EFF6FF;
+  border-radius: 100px;
+  color: var(--pri);
   font-size: 12px;
   font-weight: 600;
-  flex: 1;
+  white-space: nowrap;
+}
+.detail-hero-name {
+  margin: 0;
+  text-align: right;
+  color: #0F172A;
+  font-size: 22px;
+  font-weight: 700;
+}
+.detail-hero-spec {
+  align-self: stretch;
+  margin: 0;
+  text-align: right;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22.4px;
+}
+
+.detail-rule {
+  align-self: stretch;
+  height: 0;
+  border-top: 1px solid #E2E8F0;
+}
+
+/* "قارن السعر بين الموزعين" */
+.detail-section {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.detail-section-title {
+  margin: 0;
+  text-align: right;
+  color: #0F172A;
+  font-size: 16px;
+  font-weight: 700;
+}
+.offer-list {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* Selectable distributor row */
+.offer-card {
+  align-self: stretch;
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  margin: 0;
+  text-align: right;
+  background: #fff;
+  border: 0;
+  outline: 1px solid #E2E8F0;
+  outline-offset: -1px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, .03);
+  cursor: pointer;
+  transition: outline-color .15s, background .15s;
+}
+.offer-card.sel {
+  background: #ECFDF5;
+  outline-color: #10B981;
+  box-shadow: none;
+}
+.offer-card[disabled] { opacity: .55; cursor: not-allowed; }
+.offer-card:focus-visible {
+  outline-color: var(--pri);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .25);
+}
+
+/* right side: distributor name + rating */
+.offer-main {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.offer-header {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+.offer-name {
+  text-align: right;
+  color: #0F172A;
+  font-size: 14px;
+  font-weight: 700;
+}
+.best-badge {
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: #ECFDF5;
+  color: var(--good);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.offer-rating {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 4px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+}
+.offer-rating svg { flex: none; }
+
+.offer-spacer { flex: 1 1 0; height: 1px; }
+
+/* left side: radio, price, ETA */
+.offer-aside {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.offer-radio { display: flex; align-items: center; }
+.offer-price {
+  direction: ltr;
+  color: var(--pri);
+  font-size: 16px;
+  font-weight: 700;
+}
+.offer-eta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #475569;
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.offer-eta svg { flex: none; }
+.offer-stk {
+  font-size: 11px;
+  font-weight: 600;
 }
 .offer-stk.good { color: var(--good); }
 .offer-stk.warn { color: var(--warn); }
 .offer-stk.bad  { color: var(--bad);  }
+
+/* Sticky purchase bar */
+.detail-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  padding: 16px 20px 32px;
+  background: #fff;
+  border-top: 1px solid #E2E8F0;
+  box-shadow: 0 -4px 16px rgba(15, 23, 42, .03);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+.detail-bar-row {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 16px 8px;
+}
+.detail-total {
+  direction: ltr;
+  text-align: right;
+  color: rgba(15, 23, 42, .90);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.detail-bar .qty-ctrl {
+  height: 60px;
+  padding: 6px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  background: #fff;
+  border: 0;
+  outline: 1px solid #E2E8F0;
+  outline-offset: -1px;
+  border-radius: 100px;
+  overflow: visible;
+}
+.detail-bar .qty-btn {
+  width: 48px;
+  align-self: stretch;
+  height: auto;
+  display: grid;
+  place-items: center;
+  background: #EFF6FF;
+  color: var(--pri);
+  border-radius: 999px;
+  font-size: 20px;
+  font-weight: 700;
+  transition: background .15s;
+  flex: none;
+}
+.detail-bar .qty-btn.minus, .detail-bar .qty-btn.plus { background: #EFF6FF; color: var(--pri); }
+.detail-bar .qty-btn:hover.minus, .detail-bar .qty-btn:hover.plus { background: #DBEAFE; }
+.detail-bar .qty-btn[disabled] { opacity: .45; cursor: not-allowed; }
+.detail-bar .qty-num {
+  width: 48px;
+  text-align: center;
+  color: #0F172A;
+  font-size: 24px;
+  font-weight: 700;
+}
+.detail-add {
+  align-self: stretch;
+  width: 100%;
+  height: 48px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--pri);
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, .20);
+  font-size: 16px;
+  font-weight: 700;
+}
+.detail-add[disabled] {
+  background: #CBD5E1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.detail-add.done { background: var(--good); box-shadow: 0 4px 12px rgba(16, 185, 129, .20); }
 
 /* ─── Cart ─── */
 .cart-item {
@@ -908,7 +1137,7 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 .nav-item { flex: 0 0 70px; padding: 0; gap: 4px; font-size: 11px; font-weight: 500; }
 .nav-item.active { color: var(--pri); font-weight: 700; }
 .nav-item svg { width: 22px; height: 22px; }
-.detail-hero, .card, .offer-card, .cart-item, .summary-card { box-shadow: 0 4px 12px rgba(0,0,0,.03); }
+.card, .cart-item, .summary-card { box-shadow: 0 4px 12px rgba(0,0,0,.03); }
 @media (min-width: 500px) { .app { border-inline: 0; } }
 @media (max-width: 360px) { main { padding-inline: 16px; } .hdr { padding-inline: 16px; } #l { gap: 10px; } }
 
@@ -916,9 +1145,6 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 .search { border-radius: 999px; }
 .search-icon { inset-inline-end: auto; inset-inline-start: 12px; }
 .chip { border-radius: 999px; }
-.detail-hero { padding: 0 0 18px; overflow: hidden; }
-.detail-hero-icon { width: 100%; height: 220px; margin: 0 0 16px; border-radius: 0; font-size: 64px; }
-.detail-hero-name, .detail-hero-spec { padding-inline: 18px; }
 
 /* Reference-screen details: visible controls, consistent borders and hierarchy */
 .hdr-title { color: #111827; }
@@ -954,7 +1180,8 @@ body, .app, main { background: #fff; }
   .app { width: 100%; max-width: none; margin-inline: 0; border-inline: 0; box-shadow: none; }
 }
 
-.prod-icon img, .detail-hero-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.prod-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.detail-hero-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
 </style>
 </head>
 <body>
@@ -1003,13 +1230,19 @@ const P = [
   [4,"خيوط جراحية حريرية 4/0","Ethicon","علبة 12",19],
   [4,"شفرات مشرط جراحي رقم 15","Swann-Morton","علبة 100",13]
 ];
-const D = [["اللواج",1],["الشرق",.96],["إدوارد",1.06]];
+/* name, price multiplier, rating, delivery ETA — the design screen shows a
+   rating and an ETA per distributor, so both live alongside the demo data. */
+const D = [
+  ["اللواج",  1,    4.8, "خلال 3 ساعات"],
+  ["الشرق",   .96,  4.5, "خلال 5 ساعات"],
+  ["إدوارد",  1.06, 4.2, "خلال ساعة واحدة"]
+];
 const prods = P.map((p,i) => ({
   id: i, cat: p[0], title: p[1], brand: p[2], unit: p[3],
   offers: D.map((d,j) => {
     const m = [1,.96,1.06][(i+j)%3];
     const s = (i+j)%7===0 ? 0 : ((i+j)%4===0 ? 1 : 2);
-    return { d: d[0], price: Math.round(p[4]*m*100)/100, stock: s };
+    return { d: d[0], price: Math.round(p[4]*m*100)/100, stock: s, rate: d[2], eta: d[3] };
   })
 }));
 
@@ -1019,7 +1252,7 @@ const prods = P.map((p,i) => ({
 const ST  = ["غير متوفر","كمية محدودة","متوفر"];
 const SCL = ["bad","warn","good"];  // CSS class suffix
 const $   = n => "$" + n.toFixed(2);
-const S   = { screen:"home", q:"", cat:-1, pid:null, cart:[] };
+const S   = { screen:"home", q:"", cat:-1, pid:null, cart:[], sel:0, qty:1, added:false };
 const min = p => Math.min(...p.offers.filter(o=>o.stock>0).map(o=>o.price));
 const cnt = () => S.cart.reduce((a,c) => a+c.qty, 0);
 const sub = () => S.cart.reduce((a,c) => a+c.qty*c.price, 0);
@@ -1028,12 +1261,38 @@ const fee = () => new Set(S.cart.map(c=>c.d)).size * 3;
 /* ══════════════════════════════════════════════
    NAVIGATION
 ══════════════════════════════════════════════ */
-function go(s, pid) { S.screen=s; if(pid!==undefined) S.pid=pid; render(); }
-function add(pid, d) {
+function go(s, pid) {
+  S.screen=s;
+  if(pid!==undefined) S.pid=pid;
+  // entering a product: preselect the cheapest in-stock distributor, reset qty
+  if (s==="detail" && S.pid!==null) { S.sel = bestOffer(prods[S.pid]); S.qty = 1; S.added = false; }
+  render();
+}
+function add(pid, d, qty=1) {
   const o = prods[pid].offers.find(o=>o.d===d);
   const c = S.cart.find(c=>c.pid===pid && c.d===d);
-  c ? c.qty++ : S.cart.push({pid,d,qty:1,price:o.price});
+  c ? c.qty += qty : S.cart.push({pid,d,qty,price:o.price});
   render(true);
+}
+/* index of the cheapest in-stock offer, falling back to the first one */
+function bestOffer(p) {
+  let bi = -1;
+  p.offers.forEach((o,i) => { if (o.stock>0 && (bi<0 || o.price<p.offers[bi].price)) bi=i; });
+  return bi<0 ? 0 : bi;
+}
+function pick(i) { S.sel = i; render(); }
+function qchg(n) { S.qty = Math.min(99, Math.max(1, S.qty + n)); render(); }
+function addSel() {
+  const p = prods[S.pid], o = p.offers[S.sel];
+  if (!o || !o.stock) return;
+  add(p.id, o.d, S.qty);
+  // the design has no bottom nav here, so confirm in the button itself
+  S.added = true;
+  clearTimeout(addSel._t);
+  addSel._t = setTimeout(() => {
+    S.added = false;
+    if (S.screen === "detail") render(true);
+  }, 1500);
 }
 function chg(i, n) {
   S.cart[i].qty += n;
@@ -1072,6 +1331,30 @@ function iconCheck(size=16, color="white") {
 function iconStore(size=14) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M3 9l2.45-4.9A2 2 0 017.24 3h9.52a2 2 0 011.8 1.1L21 9"/>
+  </svg>`;
+}
+/* ── product-details.html icons ── */
+function iconClock(size=12) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>
+  </svg>`;
+}
+function iconStar(size=12) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polygon points="12 2.5 15 9 22 9.8 16.8 14.4 18.3 21.3 12 17.8 5.7 21.3 7.2 14.4 2 9.8 9 9"/>
+  </svg>`;
+}
+function iconRadio(on, dim) {
+  const c = dim ? "#CBD5E1" : (on ? "#10B981" : "#94A3B8");
+  return `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="1" y="1" width="18" height="18" rx="9" stroke="${c}" stroke-width="2"/>
+    ${on ? `<circle cx="10" cy="10" r="5" fill="#10B981"/>` : ""}
+  </svg>`;
+}
+function iconShare(size=18) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+    <line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/>
   </svg>`;
 }
 
@@ -1182,48 +1465,81 @@ function screenHome() {
 
 /* ── Detail ── */
 function screenDetail() {
-  const p = prods[S.pid];
-  const lo = min(p);
+  const p   = prods[S.pid];
+  const any = p.offers.some(o=>o.stock>0);
+  const lo  = any ? min(p) : null;
+  const sel = p.offers[S.sel];
+  const canBuy = !!(sel && sel.stock);
   return `
-  <header class="hdr" role="banner">
+  <header class="hdr detail-hdr" role="banner">
     <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack()}</button>
-    <h1 class="hdr-title">مقارنة الأسعار</h1>
-    <div class="hdr-spacer"></div>
+    <h1 class="hdr-title">تفاصيل المنتج</h1>
+    <button class="hdr-btn hdr-share" aria-label="مشاركة">${iconShare()}</button>
   </header>
-  <main>
+  <main class="detail-main">
     <div class="detail-hero">
       <div class="detail-hero-icon"><img src="${PRODUCT_IMAGES[p.cat]}" alt="${p.title}"></div>
-      <div class="detail-hero-name">${p.title}</div>
-      <div class="detail-hero-spec">
-        <span dir="ltr">${p.brand}</span><br>
-        التعبئة: ${p.unit}
+    </div>
+
+    <div class="detail-head">
+      <div class="detail-title-row">
+        <h2 class="detail-hero-name">${p.title}</h2>
+        <span class="detail-cat-pill">${CATS[p.cat]}</span>
+      </div>
+      <p class="detail-hero-spec"><span dir="ltr">${p.brand}</span> — التعبئة: ${p.unit}</p>
+    </div>
+
+    <div class="detail-rule"></div>
+
+    <section class="detail-section">
+      <h3 class="detail-section-title">قارن السعر بين الموزعين</h3>
+      <div class="offer-list" role="radiogroup" aria-label="قارن السعر بين الموزعين">
+        ${p.offers.map((o,i) => {
+          const isBest = any && o.price===lo && o.stock>0;
+          const on = i===S.sel;
+          return `
+        <button
+          class="offer-card${on?' sel':''}"
+          role="radio"
+          aria-checked="${on}"
+          ${o.stock ? "" : "disabled"}
+          onclick="pick(${i})"
+          aria-label="${o.d} بسعر ${$(o.price)} ${ST[o.stock]}">
+          <div class="offer-main">
+            <div class="offer-header">
+              <span class="offer-name">${o.d}</span>
+              ${isBest ? `<span class="best-badge">الأرخص</span>` : ""}
+            </div>
+            <div class="offer-rating">${o.rate.toFixed(1)} ${iconStar()}</div>
+          </div>
+          <div class="offer-spacer"></div>
+          <div class="offer-aside">
+            <span class="offer-radio">${iconRadio(on, !o.stock)}</span>
+            <span class="offer-price">${$(o.price)}</span>
+            ${o.stock
+              ? `<span class="offer-eta">${iconClock()} ${o.eta}</span>`
+              : `<span class="offer-stk bad">${ST[o.stock]}</span>`}
+          </div>
+        </button>`;
+        }).join("")}
+      </div>
+    </section>
+  </main>
+  <div class="detail-bar">
+    <div class="detail-bar-row">
+      <div class="detail-total" aria-live="polite">${canBuy ? $(sel.price*S.qty) : "—"}</div>
+      <div class="qty-ctrl" role="group" aria-label="الكمية">
+        <button class="qty-btn minus" onclick="qchg(-1)" ${S.qty<=1?"disabled":""} aria-label="تقليل الكمية">−</button>
+        <span class="qty-num" aria-live="polite">${S.qty}</span>
+        <button class="qty-btn plus" onclick="qchg(1)" ${S.qty>=99?"disabled":""} aria-label="زيادة الكمية">+</button>
       </div>
     </div>
-    ${p.offers.map(o => {
-      const isBest = o.price===lo && o.stock>0;
-      const stClass = SCL[o.stock];
-      return `
-      <div class="offer-card${isBest?' best':''}">
-        <div class="offer-header">
-          <span class="offer-name">${o.d}</span>
-          ${isBest ? `<span class="best-badge">${iconCheck(12,'var(--good)')} الأقل سعراً</span>` : ""}
-        </div>
-        <div class="offer-row">
-          <span class="offer-price">${$(o.price)}</span>
-          <span class="offer-stk ${stClass}">● ${ST[o.stock]}</span>
-          <button
-            class="btn"
-            ${o.stock ? "" : "disabled"}
-            onclick="add(${p.id},'${o.d}')"
-            aria-label="إضافة ${p.title} من ${o.d} للسلة"
-            style="min-height:38px;font-size:13px;padding:8px 14px;">
-            ${o.stock ? "إضافة للسلة" : "غير متوفر"}
-          </button>
-        </div>
-      </div>`;
-    }).join("")}
-  </main>
-  ${bottomNav()}`;
+    <button class="detail-add${S.added?" done":""}" onclick="addSel()" ${canBuy?"":"disabled"}>
+      ${S.added
+        ? `${iconCheck(18)} تمت الإضافة`
+        : `${iconCart(18)} ${canBuy ? "أضف للسلة" : "غير متوفر"}`}
+    </button>
+  </div>`;
 }
 
 /* ── Cart ── */
