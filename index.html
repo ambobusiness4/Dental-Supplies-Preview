@@ -2367,6 +2367,13 @@ function iconLogout(size=18) {
     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
   </svg>`;
 }
+function iconHelpCircle(size=20) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+    <line x1="12" y1="17" x2="12.01" y2="17"/>
+  </svg>`;
+}
 function iconOrdersTab(size=22) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -3309,7 +3316,7 @@ function screenAccount() {
   <header class="hdr acc-hdr" role="banner">
     <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack(22)}</button>
     <h1 class="hdr-title">الملف الشخصي</h1>
-    <a class="hdr-help" href="tel:+963115000000" aria-label="المساعدة والدعم">${iconSupport(20)}</a>
+    <a class="hdr-help" href="tel:+963115000000" aria-label="المساعدة والدعم">${iconHelpCircle(20)}</a>
   </header>
   <main class="acc-main">
     <section class="acc-profile">
@@ -3343,6 +3350,9 @@ function screenAccount() {
 /* How deep each screen sits, so a transition can tell forward from back. */
 const DEPTH = { login: -1, home: 0, orders: 0, account: 0,
                 detail: 1, cart: 1, checkout: 2, track: 3 };
+/* the navbar destinations are siblings: moving between any two of them is a
+   lateral move, whatever their depth is for the rest of the app */
+const TABS = new Set(["home", "orders", "cart", "account"]);
 const depthOf = s => (s in DEPTH ? DEPTH[s] : 0);
 let prevScreen = null;
 
@@ -3354,7 +3364,8 @@ function animateScreen(a) {
   const first  = prevScreen === null;
   // same depth means a lateral move between tabs: cross-fade, no travel,
   // because neither direction would mean anything
-  const d      = first ? 1 : depthOf(S.screen) - depthOf(prevScreen);
+  const lateral = !first && TABS.has(S.screen) && TABS.has(prevScreen);
+  const d      = first ? 1 : lateral ? 0 : depthOf(S.screen) - depthOf(prevScreen);
   const from   = (first || reduce || d === 0) ? "none" : `translateX(${d > 0 ? -10 : 10}px)`;
   try {
     a.animate(
