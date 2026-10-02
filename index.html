@@ -1288,20 +1288,28 @@ main {
   padding: 12px;
   border-radius: 12px;
   background: #fff;
-  border: 1px solid #E5E7EB;
+  border: 0;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
   display: flex;
   align-items: center;
   gap: 12px;
   text-align: inherit;
   font: inherit;
   cursor: pointer;
-  transition: background .15s, border-color .15s;
+  transition: outline-color .15s, background .15s;
 }
 .pay-opt.sel {
   background: #EFF6FF;
-  border: 2px solid #2563EB;
-  padding: 11px;
+  outline: 2px solid #2563EB;
+  outline-offset: -2px;
 }
+.pay-opt:focus-visible {
+  outline-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .25);
+}
+/* the icon chip recolours with the tile instead of snapping */
+.pay-icon-box { transition: background .15s, color .15s; }
 .pay-opt:disabled { opacity: .72; cursor: not-allowed; }
 .pay-icon-box {
   width: 42px;
@@ -1862,10 +1870,13 @@ function pick(i) {
   patchDetail();
 }
 function qchg(n) {
+  tapBtn(document.querySelector(`.detail-bar .qty-btn.${n > 0 ? "plus" : "minus"}`));
   const q = Math.min(99, Math.max(1, S.qty + n));
   if (q === S.qty) return;
   S.qty = q;
   patchDetail();
+  tickValue(document.querySelector(".detail-bar .qty-num"), n);
+  tickValue(document.querySelector(".detail-total"), n);
 }
 /* Update only the bits of the detail screen that actually changed. A full
    render() would replace every <img> and make the photos visibly reload. */
@@ -1892,6 +1903,38 @@ function patchDetail() {
   if (total) total.textContent = canBuy ? $(sel.price*S.qty) : "—";
   if (addBt) addBt.disabled  = !canBuy;
 }
+/* A changed number rises into place (up when it grew, down when it shrank). */
+function tickValue(el, dir) {
+  if (!el || typeof el.animate !== "function") return;
+  const reduce = prefersReducedMotion();
+  try {
+    el.animate(
+      reduce
+        ? [{ opacity: .45 }, { opacity: 1 }]
+        : [{ transform: `translateY(${dir > 0 ? 7 : -7}px)`, opacity: .25 },
+           { transform: "translateY(0)", opacity: 1 }],
+      { duration: reduce ? 140 : 200, easing: "cubic-bezier(.22, .61, .36, 1)" }
+    );
+  } catch (e) { /* decoration only */ }
+}
+
+/* A press that springs back, so the stepper feels physical. */
+function tapBtn(el) {
+  if (!el || el.disabled || typeof el.animate !== "function") return;
+  const reduce = prefersReducedMotion();
+  try {
+    el.animate(
+      reduce
+        ? [{ transform: "scale(1)" }, { transform: "scale(.95)", offset: .4 }, { transform: "scale(1)" }]
+        : [{ transform: "scale(1)" },
+           { transform: "scale(.82)", offset: .35 },
+           { transform: "scale(1.07)", offset: .70 },
+           { transform: "scale(1)" }],
+      { duration: reduce ? 150 : 260, easing: "cubic-bezier(.3, 1.3, .5, 1)" }
+    );
+  } catch (e) { /* decoration only */ }
+}
+
 /* Keep the nav badge in sync without rebuilding the screen. */
 function syncCartBadge() {
   const n = cnt();
@@ -2443,15 +2486,24 @@ function screenCart() {
 function chgItem(pid, d, n) {
   const i = S.cart.findIndex(c => c.pid === pid && c.d === d);
   if (i < 0) return;
+  const key = `${pid}|${d}`;
+  const row = document.querySelector(`.cart-row[data-row="${key}"]`);
+  tapBtn(row && row.querySelector(`.qty-btn.${n > 0 ? "plus" : "minus"}`));
+
   const c = S.cart[i];
   c.qty += n;
   if (c.qty < 1) {
     S.cart.splice(i, 1);
     if (!S.cart.length) { render(); return; }   // swap in the empty state
     dropCartRow(pid, d);
+    patchCart();
+    syncCartBadge();
+    return;                                     // the row is on its way out
   }
   patchCart();
   syncCartBadge();
+  tickValue(document.querySelector(`[data-qty="${key}"]`), n);
+  tickValue(document.querySelector(`[data-line="${key}"]`), n);
 }
 /* Remove just that row (and its separator, and the group if now empty)
    instead of rebuilding the screen, so the other thumbnails never reload. */
@@ -2596,7 +2648,7 @@ function payList() {
   return PAYS.map(m => {
     const on = S.pay === m.id;
     return `
-    <button class="pay-opt${on ? " sel" : ""}" role="radio" aria-checked="${on}"
+    <button class="pay-opt${on ? " sel" : ""}" data-pay="${m.id}" role="radio" aria-checked="${on}"
             ${m.off ? "disabled" : `onclick="setPay('${m.id}')"`}>
       <span class="pay-icon-box">${m.icon()}</span>
       <span class="pay-info">
@@ -2611,8 +2663,15 @@ function payList() {
 function setPay(id) {
   if (S.pay === id) return;
   S.pay = id;
-  const l = document.getElementById("payList");
-  if (l) l.innerHTML = payList();
+  // mirror patchDetail(): toggle classes on the existing nodes so the
+  // outline and background transitions actually play
+  document.querySelectorAll(".pay-opt").forEach(el => {
+    const on = el.dataset.pay === id;
+    el.classList.toggle("sel", on);
+    el.setAttribute("aria-checked", String(on));
+    const r = el.querySelector(".pay-radio");
+    if (r) r.innerHTML = iconPayRadio(on);
+  });
 }
 
 /* ── Track order ── */
