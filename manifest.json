@@ -1,6 +1,6 @@
 {
-  "name": "معاينة: مستلزمات الأسنان",
-  "short_name": "مستلزمات الأسنان",
+  "name": "عيادتي",
+  "short_name": "عيادتي",
   "lang": "ar",
   "dir": "rtl",
   "start_url": "./index.html",

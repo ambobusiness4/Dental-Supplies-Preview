@@ -3,9 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>مستلزمات الأسنان</title>
+<title>عيادتي</title>
 <meta name="description" content="تطبيق طلب مستلزمات الأسنان – قارن الأسعار بين الموردين وأضف للسلة بسهولة">
 <meta name="theme-color" content="#2563EB">
+<meta name="apple-mobile-web-app-title" content="عيادتي">
 <link rel="icon" href="assets/icon-192.png" type="image/png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="manifest" href="manifest.json">
@@ -842,6 +843,53 @@ main {
   .cart-pop { animation: cart-soft .42s ease-out; }
 }
 
+/* ─── Motion ───
+   Everything here is deliberately small: 120-240ms, short travel, and every
+   rule has a reduced-motion variant that softens rather than removes it. */
+
+/* press feedback on anything tappable */
+.prod-card, .offer-card, .pay-opt, .chip, .hdr-btn, .nav-item,
+.btn, .cart-cta, .co-confirm, .detail-add, .tr-call, .qty-btn, .step-btn {
+  transition: transform .12s ease, background-color .15s ease, border-color .15s ease;
+}
+.prod-card:active, .offer-card:active, .pay-opt:not(:disabled):active { transform: scale(.985); }
+.btn:active, .cart-cta:active, .co-confirm:active,
+.detail-add:not(:disabled):active, .tr-call:active { transform: scale(.975); }
+.chip:active, .hdr-btn:active, .nav-item:active, .qty-btn:not(:disabled):active { transform: scale(.94); }
+
+/* the courier is moving, so the active timeline node breathes */
+@keyframes node-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(37, 99, 235, .40); }
+  70%  { box-shadow: 0 0 0 9px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+.tr-node.active { animation: node-pulse 2.6s ease-out infinite; }
+
+/* the live "متاح الآن" dot on the courier card */
+@keyframes dot-breathe {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .45; }
+}
+.tr-online::before { animation: dot-breathe 2.2s ease-in-out infinite; }
+
+/* the cart count reacting to a change */
+@keyframes badge-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+.nav-badge.pop { animation: badge-pop .32s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tr-node.active   { animation-duration: 4s; }
+  .tr-online::before { animation-duration: 3.4s; }
+  .prod-card:active, .offer-card:active, .pay-opt:not(:disabled):active,
+  .btn:active, .cart-cta:active, .co-confirm:active,
+  .detail-add:not(:disabled):active, .tr-call:active,
+  .chip:active, .hdr-btn:active, .nav-item:active,
+  .qty-btn:not(:disabled):active { transform: scale(.99); }
+}
+
 /* ─── Cart ───
    Matches "Dental Supplies design html/cart.html" */
 .hdr.cart-hdr { height: 54px; padding: 0 16px; gap: 12px; border-bottom: 1px solid #E5E7EB; }
@@ -1669,7 +1717,7 @@ main { padding: 10px 24px 24px; background: var(--bg); }
 .brand-lockup { display: flex; align-items: center; gap: 8px; direction: rtl; }
 .brand-lockup .hdr-logo { flex: none; }
 .home-title { margin: 0; color: var(--pri); font-size: 20px; font-weight: 700; line-height: 1; }
-.notification-btn { color: #1F2937; }
+.notification-btn { color: #1F2937; border-radius: 12px; }
 .search { border: 1px solid #E5E7EB; background: #F3F4F6; }
 .chip { border: 1px solid #E5E7EB; background: #F3F4F6; color: #4B5563; }
 .chip.on { border-color: var(--pri); background: var(--pri); color: #fff; }
@@ -1856,7 +1904,19 @@ function syncCartBadge() {
       b.setAttribute("aria-hidden", "true");
       item.insertBefore(b, item.lastElementChild);
     }
-    if (b) { n ? b.textContent = n : b.remove(); }
+    if (b) {
+      if (n) {
+        const changed = b.textContent !== String(n);
+        b.textContent = n;
+        if (changed) {
+          b.classList.remove("pop");
+          void b.getBoundingClientRect();
+          b.classList.add("pop");
+        }
+      } else {
+        b.remove();
+      }
+    }
   });
 }
 /* Nudge every visible cart glyph so the user sees the item land. */
@@ -2403,12 +2463,34 @@ function dropCartRow(pid, d) {
     : (row.previousElementSibling && row.previousElementSibling.classList.contains("cart-row-sep")
         ? row.previousElementSibling : null);
   const card = row.closest(".cart-card");
-  if (sep) sep.remove();
-  row.remove();
-  if (card && !card.querySelector(".cart-row")) {
-    const group = card.closest(".cart-group");
-    if (group) group.remove();
-  }
+
+  const finish = () => {
+    if (sep) sep.remove();
+    row.remove();
+    if (card && !card.querySelector(".cart-row:not([data-removing])")) {
+      const group = card.closest(".cart-group");
+      if (group) group.remove();
+    }
+  };
+
+  if (prefersReducedMotion() || typeof row.animate !== "function") { finish(); return; }
+
+  // collapse the row's own height so the rows below slide up with it
+  const h = row.getBoundingClientRect().height;
+  row.dataset.removing = "1";
+  row.style.overflow = "hidden";
+  if (sep) sep.style.overflow = "hidden";
+  const opts = { duration: 190, easing: "ease-in", fill: "forwards" };
+  try {
+    if (sep) sep.animate([{ opacity: 1 }, { opacity: 0 }], opts);
+    row.animate(
+      [
+        { height: h + "px", opacity: 1, paddingTop: "8px", paddingBottom: "8px" },
+        { height: "0px",    opacity: 0, paddingTop: "0px", paddingBottom: "0px" }
+      ],
+      opts
+    ).addEventListener("finish", finish);
+  } catch (e) { finish(); }
 }
 /* Refresh the numbers that changed. No innerHTML on the screen root. */
 function patchCart() {
@@ -2698,6 +2780,27 @@ setInterval(patchTrack, 30e3);
 /* ══════════════════════════════════════════════
    RENDER
 ══════════════════════════════════════════════ */
+/* How deep each screen sits, so a transition can tell forward from back. */
+const DEPTH = { home: 0, detail: 1, cart: 1, checkout: 2, track: 3 };
+const depthOf = s => (s in DEPTH ? DEPTH[s] : 0);
+let prevScreen = null;
+
+/* Screen transition: a short fade with a little inline travel. Under RTL a
+   forward push enters from the left, a back from the right. */
+function animateScreen(a) {
+  if (typeof a.animate !== "function") return;
+  const reduce = prefersReducedMotion();
+  const first  = prevScreen === null;
+  const fwd    = first || depthOf(S.screen) >= depthOf(prevScreen);
+  const from   = (first || reduce) ? "none" : `translateX(${fwd ? -10 : 10}px)`;
+  try {
+    a.animate(
+      [{ opacity: 0, transform: from }, { opacity: 1, transform: "none" }],
+      { duration: reduce ? 140 : 220, easing: "cubic-bezier(.22, .61, .36, 1)" }
+    );
+  } catch (e) { /* animation is decoration; never let it break navigation */ }
+}
+
 function render(keep) {
   const a = document.getElementById("app");
   const prevScrollTop = keep ? (document.querySelector("main") || {}).scrollTop : 0;
@@ -2711,6 +2814,10 @@ function render(keep) {
   else                               h = screenHome();
 
   a.innerHTML = h;
+
+  // Only animate a real screen change, never a scroll-preserving re-render
+  if (!keep && S.screen !== prevScreen) animateScreen(a);
+  prevScreen = S.screen;
 
   // Restore scroll
   const m = a.querySelector("main");
