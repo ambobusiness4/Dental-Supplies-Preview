@@ -49,6 +49,9 @@
   box-sizing: border-box;
 }
 *, *::before, *::after { box-sizing: border-box; }
+/* author display rules (.prod-card is flex) would otherwise beat the UA
+   [hidden] rule, so make hiding explicit */
+[hidden] { display: none !important; }
 html, body { height: 100%; margin: 0; }
 
 body {
@@ -821,7 +824,17 @@ main {
   box-shadow: none;
   cursor: not-allowed;
 }
-.detail-add.done { background: var(--good); box-shadow: 0 4px 12px rgba(16, 185, 129, .20); }
+/* cart glyph reacts when something is added */
+@keyframes cart-pop {
+  0%   { transform: scale(1)    rotate(0deg); }
+  25%  { transform: scale(1.35) rotate(-10deg); }
+  55%  { transform: scale(.92)  rotate(6deg); }
+  80%  { transform: scale(1.1)  rotate(-3deg); }
+  100% { transform: scale(1)    rotate(0deg); }
+}
+.cart-ico { transform-origin: center; }
+.cart-pop { animation: cart-pop .55s cubic-bezier(.3, 1.4, .5, 1); }
+@media (prefers-reduced-motion: reduce) { .cart-pop { animation: none; } }
 
 /* ─── Cart ─── */
 .cart-item {
@@ -1266,7 +1279,7 @@ const prods = P.map((p,i) => ({
 const ST  = ["غير متوفر","كمية محدودة","متوفر"];
 const SCL = ["bad","warn","good"];  // CSS class suffix
 const $   = n => "$" + n.toFixed(2);
-const S   = { screen:"home", q:"", cat:-1, pid:null, cart:[], sel:0, qty:1, added:false };
+const S   = { screen:"home", q:"", cat:-1, pid:null, cart:[], sel:0, qty:1 };
 const min = p => Math.min(...p.offers.filter(o=>o.stock>0).map(o=>o.price));
 const cnt = () => S.cart.reduce((a,c) => a+c.qty, 0);
 const sub = () => S.cart.reduce((a,c) => a+c.qty*c.price, 0);
@@ -1279,14 +1292,13 @@ function go(s, pid) {
   S.screen=s;
   if(pid!==undefined) S.pid=pid;
   // entering a product: preselect the cheapest in-stock distributor, reset qty
-  if (s==="detail" && S.pid!==null) { S.sel = bestOffer(prods[S.pid]); S.qty = 1; S.added = false; }
+  if (s==="detail" && S.pid!==null) { S.sel = bestOffer(prods[S.pid]); S.qty = 1; }
   render();
 }
 function add(pid, d, qty=1) {
   const o = prods[pid].offers.find(o=>o.d===d);
   const c = S.cart.find(c=>c.pid===pid && c.d===d);
   c ? c.qty += qty : S.cart.push({pid,d,qty,price:o.price});
-  render(true);
 }
 /* index of the cheapest in-stock offer, falling back to the first one */
 function bestOffer(p) {
@@ -1294,19 +1306,71 @@ function bestOffer(p) {
   p.offers.forEach((o,i) => { if (o.stock>0 && (bi<0 || o.price<p.offers[bi].price)) bi=i; });
   return bi<0 ? 0 : bi;
 }
-function pick(i) { S.sel = i; render(); }
-function qchg(n) { S.qty = Math.min(99, Math.max(1, S.qty + n)); render(); }
+function pick(i) {
+  if (S.sel === i) return;
+  S.sel = i;
+  patchDetail();
+}
+function qchg(n) {
+  const q = Math.min(99, Math.max(1, S.qty + n));
+  if (q === S.qty) return;
+  S.qty = q;
+  patchDetail();
+}
+/* Update only the bits of the detail screen that actually changed. A full
+   render() would replace every <img> and make the photos visibly reload. */
+function patchDetail() {
+  const p = prods[S.pid];
+  if (!p) return;
+  document.querySelectorAll(".offer-card").forEach((el, i) => {
+    const on = i === S.sel;
+    el.classList.toggle("sel", on);
+    el.setAttribute("aria-checked", String(on));
+    const r = el.querySelector(".offer-radio");
+    if (r) r.innerHTML = iconRadio(on, !p.offers[i].stock);
+  });
+  const sel = p.offers[S.sel];
+  const canBuy = !!(sel && sel.stock);
+  const num   = document.querySelector(".detail-bar .qty-num");
+  const minus = document.querySelector(".detail-bar .qty-btn.minus");
+  const plus  = document.querySelector(".detail-bar .qty-btn.plus");
+  const total = document.querySelector(".detail-total");
+  const addBt = document.querySelector(".detail-add");
+  if (num)   num.textContent = S.qty;
+  if (minus) minus.disabled  = S.qty <= 1;
+  if (plus)  plus.disabled   = S.qty >= 99;
+  if (total) total.textContent = canBuy ? $(sel.price*S.qty) : "—";
+  if (addBt) addBt.disabled  = !canBuy;
+}
+/* Keep the nav badge in sync without rebuilding the screen. */
+function syncCartBadge() {
+  const n = cnt();
+  document.querySelectorAll(".nav-item").forEach(item => {
+    if (!/السلة/.test(item.getAttribute("aria-label") || "")) return;
+    let b = item.querySelector(".nav-badge");
+    if (n && !b) {
+      b = document.createElement("span");
+      b.className = "nav-badge";
+      b.setAttribute("aria-hidden", "true");
+      item.insertBefore(b, item.lastElementChild);
+    }
+    if (b) { n ? b.textContent = n : b.remove(); }
+  });
+}
+/* Nudge every visible cart glyph so the user sees the item land. */
+function bumpCart() {
+  document.querySelectorAll(".cart-ico").forEach(el => {
+    el.classList.remove("cart-pop");
+    void el.getBoundingClientRect();   // force reflow so the animation restarts
+    el.classList.add("cart-pop");
+  });
+}
 function addSel() {
   const p = prods[S.pid], o = p.offers[S.sel];
   if (!o || !o.stock) return;
   add(p.id, o.d, S.qty);
-  // the design has no bottom nav here, so confirm in the button itself
-  S.added = true;
-  clearTimeout(addSel._t);
-  addSel._t = setTimeout(() => {
-    S.added = false;
-    if (S.screen === "detail") render(true);
-  }, 1500);
+  syncCartBadge();
+  bumpCart();
 }
 function chg(i, n) {
   S.cart[i].qty += n;
@@ -1318,7 +1382,7 @@ function chg(i, n) {
    ICON HELPERS (inline SVG)
 ══════════════════════════════════════════════ */
 function iconCart(size=20) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+  return `<svg class="cart-ico" width="${size}" height="${size}" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
     <path d="M1.87881 1.87881H3.71215L6.15048 13.2644C6.23993 13.6814 6.47193 14.0541 6.80655 14.3185C7.14117 14.5828 7.55748 14.7223 7.98381 14.7128H16.9488C17.3661 14.7121 17.7706 14.5691 18.0956 14.3075C18.4206 14.0458 18.6466 13.6811 18.7363 13.2736L20.2488 6.46238H4.69298M8.24983 19.2507C8.24983 19.757 7.83942 20.1674 7.33316 20.1674C6.8269 20.1674 6.41649 19.757 6.41649 19.2507C6.41649 18.7444 6.8269 18.334 7.33316 18.334C7.83942 18.334 8.24983 18.7444 8.24983 19.2507ZM18.3332 19.2507C18.3332 19.757 17.9228 20.1674 17.4165 20.1674C16.9102 20.1674 16.4998 19.757 16.4998 19.2507C16.4998 18.7444 16.9102 18.334 17.4165 18.334C17.9228 18.334 18.3332 18.7444 18.3332 19.2507Z"/>
   </svg>`;
 }
@@ -1407,18 +1471,7 @@ function bottomNav() {
 
 /* ── Home ── */
 function renderList() {
-  const q = S.q.trim().toLowerCase();
-  const list = prods.filter(p =>
-    (S.cat < 0 || p.cat === S.cat) &&
-    (!q || (p.title+p.brand).toLowerCase().includes(q))
-  );
-  if (!list.length) return `
-    <div class="empty">
-      <div class="empty-icon">🔍</div>
-      <p>لا توجد نتائج مطابقة</p>
-    </div>`;
-
-  return list.map(p => {
+  const cards = prods.map(p => {
     const avail = p.offers.filter(o=>o.stock>0);
     const hasPrice = avail.length > 0;
     const loPrice = hasPrice ? min(p) : null;
@@ -1428,7 +1481,7 @@ function renderList() {
     const stLabel = ST[bestStock];
     const distCount = p.offers.length;
     return `
-    <button class="prod-card" onclick="go('detail',${p.id})" aria-label="عرض تفاصيل ${p.title}">
+    <button class="prod-card" data-id="${p.id}" onclick="go('detail',${p.id})" aria-label="عرض تفاصيل ${p.title}">
       <div class="prod-icon"><img src="${PRODUCT_IMAGES[p.cat]}" alt="${p.title}" loading="lazy"></div>
       <div class="prod-body">
         <div class="prod-name">${p.title}</div>
@@ -1444,6 +1497,33 @@ function renderList() {
       </div>
     </button>`;
   }).join("");
+  return cards + `
+    <div class="empty" id="empty" hidden>
+      <div class="empty-icon">🔍</div>
+      <p>لا توجد نتائج مطابقة</p>
+    </div>`;
+}
+/* Filter by toggling [hidden] rather than rebuilding the list. */
+function applyFilter() {
+  const q = S.q.trim().toLowerCase();
+  let shown = 0;
+  document.querySelectorAll("#l .prod-card").forEach(el => {
+    const p = prods[+el.dataset.id];
+    const ok = (S.cat < 0 || p.cat === S.cat) &&
+               (!q || (p.title+p.brand).toLowerCase().includes(q));
+    el.hidden = !ok;
+    if (ok) shown++;
+  });
+  const empty = document.getElementById("empty");
+  if (empty) empty.hidden = shown > 0;
+}
+/* Category chips: restyle in place, then filter. No full render. */
+function setCat(i) {
+  S.cat = i;
+  document.querySelectorAll(".chips .chip").forEach((el, idx) => {
+    el.classList.toggle("on", idx - 1 === i);
+  });
+  applyFilter();
 }
 
 function screenHome() {
@@ -1469,8 +1549,8 @@ function screenHome() {
         aria-label="بحث عن منتجات">
     </div>
     <div class="chips" role="list" aria-label="تصفية حسب الفئة">
-      <button class="chip ${S.cat<0?'on':''}" onclick="S.cat=-1;render()" role="listitem">الكل</button>
-      ${CATS.map((c,i)=>`<button class="chip ${S.cat===i?'on':''}" onclick="S.cat=${i};render()" role="listitem">${c}</button>`).join("")}
+      <button class="chip ${S.cat<0?'on':''}" onclick="setCat(-1)" role="listitem">الكل</button>
+      ${CATS.map((c,i)=>`<button class="chip ${S.cat===i?'on':''}" onclick="setCat(${i})" role="listitem">${c}</button>`).join("")}
     </div>
     <div id="l">${renderList()}</div>
   </main>
@@ -1548,10 +1628,8 @@ function screenDetail() {
         <button class="qty-btn plus" onclick="qchg(1)" ${S.qty>=99?"disabled":""} aria-label="زيادة الكمية">+</button>
       </div>
     </div>
-    <button class="detail-add${S.added?" done":""}" onclick="addSel()" ${canBuy?"":"disabled"}>
-      ${S.added
-        ? `${iconCheck(18)} تمت الإضافة`
-        : `${iconCart(18)} ${canBuy ? "أضف للسلة" : "غير متوفر"}`}
+    <button class="detail-add" onclick="addSel()" ${canBuy?"":"disabled"}>
+      ${iconCart(18)} ${canBuy ? "أضف للسلة" : "غير متوفر"}
     </button>
   </div>`;
 }
@@ -1772,7 +1850,7 @@ function render(keep) {
   if (qi) {
     const update = () => {
       S.q = qi.value;
-      document.getElementById("l").innerHTML = renderList();
+      applyFilter();
     };
     qi.addEventListener("input",  update);
     qi.addEventListener("search", update);
