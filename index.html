@@ -256,94 +256,165 @@ main {
   background: var(--pri-soft);
 }
 
-/* ─── Product Card (Home list) ─── */
+/* ─── Product Card (Home list) ───
+   Matches the card spec in "Dental Supplies design html/home.html" */
 .prod-card {
+  position: relative;
   display: flex;
-  gap: 12px;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
   width: 100%;
-  text-align: start;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-align: right;
   background: var(--bg-white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 12px;
-  margin-bottom: 10px;
-  box-shadow: var(--shadow-md);
-  transition: box-shadow .15s, transform .1s;
+  border: 0;
+  outline: 1px solid #E5E7EB;
+  outline-offset: -1px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .02);
+  transition: box-shadow .15s ease;
   cursor: pointer;
 }
-.prod-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-1px);
+.prod-card:hover { box-shadow: 0 6px 16px rgba(37, 99, 235, .10); }
+.prod-card:active { opacity: .9; }
+/* keep the 1px card edge visible while still showing a focus ring */
+.prod-card:focus-visible {
+  outline-color: var(--pri);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .25);
 }
-.prod-card:active { transform: scale(.99); }
 
+/* Product image strip */
 .prod-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: var(--radius-md);
-  background: var(--pri-soft);
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  font-size: 22px;
-  color: var(--pri);
+  align-self: stretch;
+  width: 100%;
+  height: 110px;
   flex: none;
-}
-.prod-body { flex: 1; min-width: 0; }
-.prod-name {
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--ink);
-  white-space: nowrap;
+  border-radius: 0;
+  background: #EFF6FF;
+  display: block;
   overflow: hidden;
-  text-overflow: ellipsis;
-}
-.prod-brand {
-  font-size: 12px;
-  color: var(--mute);
-  margin-top: 2px;
-}
-.prod-meta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 5px;
-  flex-wrap: wrap;
-}
-.avail-badge {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 999px;
-}
-.avail-badge.good { background: var(--good-bg); color: var(--good); }
-.avail-badge.warn { background: var(--warn-bg); color: var(--warn); }
-.avail-badge.bad  { background: var(--bad-bg);  color: var(--bad);  }
-.dist-count {
-  font-size: 11px;
-  color: var(--mute);
-  display: flex;
-  align-items: center;
-  gap: 3px;
 }
 
-.prod-price-col {
-  text-align: end;
-  flex: none;
+/* Everything under the image: 12px padding, 8px rhythm */
+.prod-body {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 12px;
+  min-width: 0;
 }
-.prod-from-label {
-  font-size: 11px;
-  color: var(--mute);
+
+.prod-name {
+  align-self: stretch;
+  text-align: right;
+  color: #1F2937;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.45;
+  white-space: normal;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  min-height: 43px;
+}
+.prod-brand { display: none; }
+
+/* "150 ل.س  يبدأ من" — price first, label to its right */
+.prod-price-col {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 4px;
+  direction: ltr;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  text-align: right;
 }
 .prod-from-price {
-  font-size: 17px;
-  font-weight: 800;
-  color: var(--ink);
+  display: inline;
   direction: ltr;
-  display: block;
+  color: var(--pri);
+  font-size: 15px;
+  font-weight: 800;
 }
+.prod-from-label {
+  display: inline;
+  color: #4B5563;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* Hairline rule under the price */
+.prod-divider {
+  align-self: stretch;
+  height: 0;
+  border-top: 1px solid #F3F4F6;
+}
+
+/* "6 موزعين" chip floating over the bottom-left of the image */
+.dist-count {
+  position: absolute;
+  left: 12px;
+  top: -30px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #EFF6FF;
+  color: var(--pri);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.dist-count svg { display: none; }
+
+/* "متوفر الآن" with its status dot */
+.prod-meta {
+  align-self: stretch;
+  display: flex;
+  /* page is RTL, so flex-start resolves to the right edge (design: flex-end in LTR) */
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  min-height: 17px;
+}
+.avail-badge {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  font-size: 11px;
+  font-weight: 600;
+}
+.avail-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: currentColor;
+  flex: none;
+}
+.avail-badge.good { color: var(--good); }
+.avail-badge.warn { color: var(--warn); }
+.avail-badge.bad  { color: var(--bad);  }
 
 /* ─── Empty state ─── */
 .empty {
@@ -833,22 +904,6 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 .chip { padding: 7px 13px; border: 0; background: #fff; color: var(--ink-sub); border-radius: 7px; font-size: 12px; font-weight: 600; }
 .chip.on { background: var(--pri); box-shadow: none; }
 #l { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.prod-card { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 0; min-width: 0; padding: 0; margin: 0; overflow: hidden; text-align: right; border: 1px solid var(--line); border-radius: 12px; background: #fff; box-shadow: var(--shadow-md); transform: none; }
-.prod-card:hover { transform: none; box-shadow: 0 5px 16px rgba(37,99,235,.10); }
-.prod-icon { width: 100%; height: 110px; border-radius: 0; background: linear-gradient(145deg,#eaf2ff,#dbeafe); color: var(--pri); font-size: 30px; }
-.prod-body { padding: 10px 12px 0; }
-.prod-name { font-size: 14px; line-height: 1.45; white-space: normal; height: 41px; color: var(--ink); }
-.prod-brand { display: none; }
-.prod-meta { margin-top: 8px; min-height: 17px; display: flex; justify-content: flex-start; }
-.avail-badge { font-size: 11px; padding: 0; background: transparent !important; }
-.avail-badge.good { color: var(--good); }
-.avail-badge.warn { color: var(--warn); }
-.avail-badge.bad { color: var(--bad); }
-.dist-count { position: absolute; inset-inline-start: 12px; top: 110px; transform: translateY(-50%); margin-inline-start: 0; padding: 4px 8px; border-radius: 6px; background: var(--pri-soft); color: var(--pri); font-size: 11px; }
-.dist-count svg { display: none; }
-.prod-price-col { order: 3; display: flex; flex-direction: row-reverse; align-items: baseline; gap: 4px; padding: 8px 12px 11px; margin-top: 8px; border-top: 1px solid #F3F4F6; text-align: right; }
-.prod-from-label { font-size: 12px; color: var(--mute); }
-.prod-from-price { font-size: 15px; color: var(--pri); }
 .nav { height: 68px; padding: 10px 24px 0; border-top: 1px solid var(--line); justify-content: space-around; }
 .nav-item { flex: 0 0 70px; padding: 0; gap: 4px; font-size: 11px; font-weight: 500; }
 .nav-item.active { color: var(--pri); font-weight: 700; }
@@ -861,8 +916,6 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 .search { border-radius: 999px; }
 .search-icon { inset-inline-end: auto; inset-inline-start: 12px; }
 .chip { border-radius: 999px; }
-.prod-price-col { direction: rtl; flex-direction: row; justify-content: flex-start; text-align: right; }
-.prod-from-label { direction: rtl; text-align: right; }
 .detail-hero { padding: 0 0 18px; overflow: hidden; }
 .detail-hero-icon { width: 100%; height: 220px; margin: 0 0 16px; border-radius: 0; font-size: 64px; }
 .detail-hero-name, .detail-hero-spec { padding-inline: 18px; }
@@ -877,8 +930,6 @@ main { padding: 10px 24px 18px; background: var(--bg); }
 .search { border: 1px solid #E5E7EB; background: #F3F4F6; }
 .chip { border: 1px solid #E5E7EB; background: #fff; color: #4B5563; }
 .chip.on { border-color: var(--pri); background: var(--pri); color: #fff; }
-.prod-price-col { direction: rtl; flex-direction: row; justify-content: flex-start; }
-.prod-from-price { direction: rtl; display: inline; }
 
 /* The reference screens are phone-sized, but the live demo should use a tablet viewport well. */
 @media (min-width: 600px) {
@@ -888,13 +939,11 @@ main { padding: 10px 24px 18px; background: var(--bg); }
   main { padding-inline: clamp(24px, 6vw, 72px); }
   #l { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
   .prod-icon { height: 150px; }
-  .dist-count { top: 150px; }
   .nav { padding-inline: clamp(24px, 6vw, 72px); }
 }
 @media (min-width: 960px) {
   #l { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .prod-icon { height: 170px; }
-  .dist-count { top: 170px; }
 }
 
 /* Tablet shell: use the complete viewport rather than the phone preview width. */
@@ -1086,14 +1135,15 @@ function renderList() {
       <div class="prod-icon"><img src="${PRODUCT_IMAGES[p.cat]}" alt="${p.title}" loading="lazy"></div>
       <div class="prod-body">
         <div class="prod-name">${p.title}</div>
-        <div class="prod-meta">
-          <span class="avail-badge ${stClass}">● ${stLabel}</span>
-          <span class="dist-count">${distCount} موزعين</span>
+        <div class="prod-price-col">
+          <span class="prod-from-price">${hasPrice ? $(loPrice) : "—"}</span>
+          <span class="prod-from-label">يبدأ من</span>
         </div>
-      </div>
-      <div class="prod-price-col">
-        <span class="prod-from-label">يبدأ من</span>
-        <span class="prod-from-price">${hasPrice ? $(loPrice) : "—"}</span>
+        <div class="prod-divider"></div>
+        <span class="dist-count">${distCount} موزعين</span>
+        <div class="prod-meta">
+          <span class="avail-badge ${stClass}">${stLabel}</span>
+        </div>
       </div>
     </button>`;
   }).join("");
