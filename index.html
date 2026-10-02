@@ -1269,25 +1269,12 @@ main {
   align-items: flex-start;
   gap: 2px;
 }
-.pay-name-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
 .pay-name {
   font-size: 13px;
   font-weight: 700;
   color: #111827;
 }
 .pay-opt:disabled .pay-name { color: #6B7280; }
-.pay-tag {
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: #ECFDF5;
-  color: #10B981;
-}
 .pay-desc {
   align-self: stretch;
   text-align: right;
@@ -1713,9 +1700,9 @@ function iconSearch(size=18) {
     <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
   </svg>`;
 }
-function iconBack() {
-  return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="9 18 15 12 9 6"/>
+function iconBack(size = 18) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.75 13.5L11.25 9L6.75 4.5"/>
   </svg>`;
 }
 function iconCheck(size=16, color="white") {
@@ -1732,6 +1719,7 @@ function iconPencil(size=13) {
 function iconPin(size=16) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
     <path d="M8.40066 14.5333C9.64054 13.4626 13.3328 9.99559 13.3328 6.66662C13.3328 5.252 12.771 3.89532 11.7709 2.89504C10.7708 1.89475 9.41438 1.33279 8.00004 1.33279C6.58569 1.33279 5.22927 1.89475 4.22918 2.89504C3.22908 3.89532 2.66724 5.252 2.66724 6.66662C2.66724 9.99559 6.35953 13.4626 7.59941 14.5333C7.71492 14.6202 7.85552 14.6672 8.00004 14.6672C8.14455 14.6672 8.28516 14.6202 8.40066 14.5333Z"/>
+    <circle cx="8" cy="6.66662" r="2"/>
   </svg>`;
 }
 function iconSend(size=14) {
@@ -2050,7 +2038,7 @@ const offerOf = c => prods[c.pid].offers.find(o => o.d === c.d);
 function screenCart() {
   const head = `
   <header class="hdr cart-hdr" role="banner">
-    <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack()}</button>
+    <button class="hdr-btn" onclick="go('home')" aria-label="رجوع">${iconBack(22)}</button>
     <h1 class="hdr-title">سلة المشتريات</h1>
     <div class="hdr-spacer"></div>
   </header>`;
@@ -2180,7 +2168,7 @@ function patchCart() {
 function screenCheckout() {
   return `
   <header class="hdr co-hdr" role="banner">
-    <button class="hdr-btn" onclick="go('cart')" aria-label="رجوع">${iconBack()}</button>
+    <button class="hdr-btn" onclick="go('cart')" aria-label="رجوع">${iconBack(22)}</button>
     <h1 class="hdr-title">الدفع</h1>
     <div class="hdr-spacer"></div>
   </header>
@@ -2267,10 +2255,7 @@ function payList() {
             ${m.off ? "disabled" : `onclick="setPay('${m.id}')"`}>
       <span class="pay-icon-box">${m.icon()}</span>
       <span class="pay-info">
-        <span class="pay-name-row">
-          <span class="pay-name">${m.name}</span>
-          ${on ? `<span class="pay-tag">محدد</span>` : ""}
-        </span>
+        <span class="pay-name">${m.name}</span>
         <span class="pay-desc${m.off ? " warn" : ""}">${m.desc}</span>
       </span>
       <span class="pay-radio">${iconPayRadio(on)}</span>
