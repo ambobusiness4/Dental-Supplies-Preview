@@ -1763,6 +1763,184 @@ body, .app, main { background: #fff; }
 
 .prod-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .detail-hero-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block; }
+
+/* ══════════════════════════════════════════════
+   Login — matches "Dental Supplies design html/login.html"
+══════════════════════════════════════════════ */
+.login-main {
+  flex: 1; min-height: 0; overflow-y: auto;
+  display: flex; flex-direction: column;
+  padding: 0 24px calc(16px + env(safe-area-inset-bottom, 0px));
+}
+.login-hero {
+  height: 200px; margin: 8px 0 4px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--pri-soft); border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, .08);
+  overflow: hidden;
+}
+.login-hero img { width: 112px; height: 112px; object-fit: contain; }
+.login-intro { padding: 12px 0 20px; display: flex; flex-direction: column; gap: 10px; }
+.login-lockup { display: flex; align-items: center; gap: 8px; }
+.login-lockup img { width: 36px; height: 36px; border-radius: 10px; }
+.login-brand { font-size: 24px; font-weight: 800; color: var(--pri); }
+.login-head { font-size: 22px; font-weight: 800; line-height: 1.4; color: #1F2937; }
+.login-sub  { font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--mute); }
+.login-card {
+  padding: 20px; background: var(--bg); border-radius: var(--radius-lg);
+  outline: 1px solid var(--line); outline-offset: -1px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.login-label { font-size: 13px; font-weight: 700; color: #1F2937; }
+.login-field {
+  height: 52px; padding: 0 12px; background: var(--bg-white); border-radius: 10px;
+  outline: 1px solid var(--line); outline-offset: -1px;
+  display: flex; align-items: center; gap: 10px;
+  /* a phone number is LTR content: the +963 prefix belongs on the left */
+  direction: ltr;
+  transition: outline-color .15s, background .15s;
+}
+.login-field:focus-within { outline: 2px solid var(--pri); outline-offset: -2px; }
+.login-field.bad { outline: 2px solid var(--bad); outline-offset: -2px; }
+.login-cc {
+  padding-right: 10px; border-right: 1px solid var(--line);
+  font-size: 14px; font-weight: 600; color: #1F2937;
+  direction: ltr; unicode-bidi: isolate; flex: 0 0 auto;
+}
+.login-input {
+  flex: 1 1 0; min-width: 0; border: 0; outline: 0; background: transparent;
+  font: inherit; font-size: 15px; color: var(--ink);
+  text-align: left; letter-spacing: .5px;
+}
+.login-input::placeholder { color: var(--mute); letter-spacing: 1px; }
+.login-err { font-size: 12px; font-weight: 600; color: var(--bad); margin-top: -6px; }
+.login-go {
+  height: 50px; background: var(--pri); color: #fff; border: 0; border-radius: 10px;
+  font: inherit; font-size: 15px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.login-trust { display: flex; gap: 12px; padding: 20px 0 8px; }
+.login-pill {
+  flex: 1 1 0; padding: 10px 12px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  font-size: 11px; font-weight: 700; text-align: center;
+}
+.login-pill.safe { background: rgba(16, 185, 129, .10); color: var(--good); }
+.login-pill.fast { background: rgba(245, 158, 11, .10); color: var(--warn); }
+.login-terms {
+  margin-top: auto; padding: 16px 8px 4px; text-align: center;
+  font-size: 11px; font-weight: 400; line-height: 1.6; color: var(--mute);
+}
+.login-terms a { color: var(--pri); text-decoration: underline; }
+
+/* ══════════════════════════════════════════════
+   Order history — matches "Dental Supplies design html/orders.html"
+══════════════════════════════════════════════ */
+.ord-main { flex: 1; min-height: 0; overflow-y: auto; padding: 12px 16px 16px; }
+.ord-search {
+  height: 48px; padding: 0 16px; background: var(--bg); border-radius: 24px;
+  display: flex; align-items: center; gap: 10px;
+  transition: outline-color .15s;
+  outline: 1px solid transparent; outline-offset: -1px;
+}
+.ord-search:focus-within { outline-color: var(--pri); }
+.ord-search .ord-search-ico { color: var(--mute-light); display: flex; flex: 0 0 auto; }
+.ord-search input {
+  flex: 1 1 0; min-width: 0; border: 0; outline: 0; background: transparent;
+  font: inherit; font-size: 14px; color: var(--ink);
+}
+.ord-search input::placeholder { color: var(--mute-light); }
+.ord-filters { display: flex; gap: 8px; padding: 12px 0 8px; flex-wrap: wrap; }
+.ord-filter {
+  padding: 6px 12px; background: var(--bg); border: 0; border-radius: var(--radius-sm);
+  font: inherit; font-size: 12px; font-weight: 600; color: var(--mute); cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.ord-filter.on { background: var(--pri); color: #fff; font-weight: 700; padding: 6px 16px; }
+.ord-list { display: flex; flex-direction: column; gap: 12px; padding-top: 8px; }
+.ord-card {
+  width: 100%; padding: 16px; background: var(--bg); border: 0;
+  border-radius: var(--radius-md); font: inherit; text-align: right; cursor: pointer;
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.ord-info { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.ord-sup { font-size: 16px; font-weight: 800; color: var(--ink); }
+.ord-money { display: flex; align-items: baseline; gap: 4px; }
+.ord-total { font-size: 24px; font-weight: 800; color: var(--pri); }
+.ord-items { font-size: 12px; font-weight: 400; color: var(--mute); }
+.ord-date { font-size: 12px; font-weight: 600; color: var(--mute); opacity: .6; }
+.ord-id { font-size: 11px; font-weight: 600; color: var(--mute-light); direction: ltr; unicode-bidi: isolate; }
+.ord-badge {
+  flex: 0 0 auto; padding: 4px 10px; border-radius: 6px;
+  font-size: 12px; font-weight: 700; white-space: nowrap;
+}
+.ord-badge.good   { background: rgba(16, 185, 129, .10); color: var(--good); }
+.ord-badge.warn   { background: rgba(245, 158, 11, .10); color: var(--warn); }
+.ord-badge.bad    { background: rgba(239, 68, 68, .10);  color: var(--bad); }
+.ord-empty { padding: 48px 16px; text-align: center; color: var(--mute); font-size: 14px; font-weight: 600; }
+
+/* ══════════════════════════════════════════════
+   Account / settings — matches "Dental Supplies design html/my-account.html"
+══════════════════════════════════════════════ */
+.acc-main { flex: 1; min-height: 0; overflow-y: auto; padding: 12px 20px 16px; }
+.acc-profile {
+  padding: 20px; background: var(--bg-white); border-radius: var(--radius-md);
+  outline: 1px solid var(--line); outline-offset: -1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .02);
+  display: flex; align-items: center; gap: 16px;
+}
+.acc-avatar {
+  flex: 0 0 auto; width: 64px; height: 64px; border-radius: 32px;
+  outline: 2px solid var(--pri); outline-offset: -2px;
+  background: var(--pri-soft); color: var(--pri);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px; font-weight: 800; letter-spacing: 1px;
+}
+.acc-who { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.acc-name { font-size: 16px; font-weight: 700; color: var(--ink); }
+.acc-state { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--good); }
+.acc-state::before { content: ""; width: 8px; height: 8px; border-radius: 4px; background: var(--good); }
+.acc-edit {
+  flex: 0 0 auto; padding: 8px 12px; background: transparent; border-radius: var(--radius-sm);
+  outline: 1px solid var(--pri); outline-offset: -1px; border: 0;
+  font: inherit; font-size: 12px; font-weight: 700; color: var(--pri); cursor: pointer;
+  display: flex; align-items: center; gap: 4px;
+}
+.acc-sec-title { padding: 24px 0 12px; font-size: 13px; font-weight: 700; color: var(--ink-sub); }
+.acc-group {
+  background: var(--bg-white); border-radius: var(--radius-md); overflow: hidden;
+  outline: 1px solid var(--line); outline-offset: -1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .02);
+  display: flex; flex-direction: column;
+}
+.acc-row {
+  width: 100%; padding: 16px; background: transparent; border: 0;
+  font: inherit; text-align: right; color: var(--ink); cursor: pointer;
+  display: flex; align-items: center; gap: 12px;
+  text-decoration: none;
+  transition: background .15s;
+}
+.acc-row + .acc-row { border-top: 1px solid var(--line); }
+.acc-row:active { background: var(--bg); }
+.acc-ico {
+  flex: 0 0 auto; width: 36px; height: 36px; border-radius: var(--radius-sm);
+  background: var(--pri-soft); color: var(--pri);
+  display: flex; align-items: center; justify-content: center;
+}
+.acc-label { flex: 1 1 0; min-width: 0; font-size: 15px; font-weight: 500; }
+.acc-tag { flex: 0 0 auto; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.acc-tag.good { background: var(--good-bg); color: var(--good); }
+.acc-tag.pri  { background: var(--pri-soft); color: var(--pri); }
+.acc-chev { flex: 0 0 auto; color: var(--mute-light); display: flex; }
+/* not built yet: still readable, but it does not pretend to be tappable */
+.acc-row.soon { cursor: default; }
+.acc-row.soon:active { background: transparent; }
+.acc-row.soon .acc-chev { opacity: .35; }
+.acc-out { margin-top: 24px; }
+.acc-out .acc-label { color: var(--bad); }
+.acc-out .acc-ico { background: var(--bad-bg); color: var(--bad); }
+.acc-ver { padding: 24px 0 8px; text-align: center; font-size: 11px; font-weight: 500; color: var(--mute-light); }
+
 </style>
 </head>
 <body>
@@ -1834,7 +2012,10 @@ const ST  = ["غير متوفر","كمية محدودة","متوفر"];
 const SCL = ["bad","warn","good"];  // CSS class suffix
 const $   = n => "$" + n.toFixed(2);
 const esc = v => String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const S   = { screen:"home", q:"", cat:-1, pid:null, cart:[], sel:0, qty:1, pay:"cod", editAddr:false };
+const S   = { screen:"login", q:"", cat:-1, pid:null, cart:[], sel:0, qty:1, pay:"cod", editAddr:false,
+              authed:false, ordQ:"", ordF:"all" };
+/* signed-in clinic — demo data, matches "my-account.html" */
+const USER = { name:"د. أحمد محمد العلي", tel:"+963 944 123 456", version:"v2.4.1" };
 /* delivery address — demo data, matches the checkout design file */
 const ADDR = {
   name: "عيادة سما لطب الأسنان",
@@ -2168,6 +2349,36 @@ function iconReceipt(size=16) {
     <path d="M8.66664 10.666H5.33364M9.33324 5.33279H5.33364M10.6664 7.99942H5.33364M2.66724 1.99929C2.66724 1.82248 2.73747 1.65292 2.86248 1.52789C2.98749 1.40287 3.15704 1.33263 3.33384 1.33263C3.4989 1.33173 3.66079 1.37798 3.80046 1.46597L4.42239 1.86596C4.56174 1.95501 4.72365 2.00233 4.88901 2.00233C5.05438 2.00233 5.21629 1.95501 5.35563 1.86596L5.97824 1.46597C6.11758 1.37692 6.27949 1.3296 6.44486 1.3296C6.61022 1.3296 6.77213 1.37692 6.91148 1.46597L7.53342 1.86596C7.67276 1.95501 7.83467 2.00233 8.00004 2.00233C8.1654 2.00233 8.32731 1.95501 8.46666 1.86596L9.08859 1.46597C9.22794 1.37692 9.38985 1.3296 9.55521 1.3296C9.72058 1.3296 9.88249 1.37692 10.0218 1.46597L10.6444 1.86596C10.7838 1.95501 10.9457 2.00233 11.1111 2.00233C11.2764 2.00233 11.4383 1.95501 11.5777 1.86596L12.1996 1.46597C12.3393 1.37798 12.5012 1.33173 12.6662 1.33263C12.843 1.33263 13.0126 1.40287 13.1376 1.52789C13.2626 1.65292 13.3328 1.82248 13.3328 1.99929V13.9991C13.3328 14.1759 13.2626 14.3455 13.1376 14.4705C13.0126 14.5955 12.843 14.6658 12.6662 14.6658C12.5012 14.6667 12.3393 14.6204 12.1996 14.5324L11.5777 14.1324C11.4383 14.0434 11.2764 13.9961 11.1111 13.9961C10.9457 13.9961 10.7838 14.0434 10.6444 14.1324L10.0218 14.5324C9.88249 14.6215 9.72058 14.6688 9.55521 14.6688C9.38985 14.6688 9.22794 14.6215 9.08859 14.5324L8.46666 14.1324C8.32731 14.0434 8.1654 13.9961 8.00004 13.9961C7.83467 13.9961 7.67276 14.0434 7.53342 14.1324L6.91148 14.5324C6.77213 14.6215 6.61022 14.6688 6.44486 14.6688C6.27949 14.6688 6.11758 14.6215 5.97824 14.5324L5.35563 14.1324C5.21629 14.0434 5.05438 13.9961 4.88901 13.9961C4.72365 13.9961 4.56174 14.0434 4.42239 14.1324L3.80046 14.5324C3.66079 14.6204 3.4989 14.6667 3.33384 14.6658C3.15704 14.6658 2.98749 14.5955 2.86248 14.4705C2.73747 14.3455 2.66724 14.1759 2.66724 13.9991V1.99929Z"/>
   </svg>`;
 }
+function iconChevronL(size=18) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="15 18 9 12 15 6"/>
+  </svg>`;
+}
+function iconClinic(size=18) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M12 9v4"/><path d="M10 11h4"/>
+  </svg>`;
+}
+function iconBell(size=18) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+  </svg>`;
+}
+function iconLogout(size=18) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+  </svg>`;
+}
+function iconUser(size=22) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+  </svg>`;
+}
+function iconBolt(size=12) {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+  </svg>`;
+}
 function iconArrowLeft(size=18) {
   return `<svg width="${size}" height="${size}" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true">
     <path d="M8.99999 3.74939L3.74939 8.99999L8.99999 14.2506M3.74939 8.99999H14.2506"/>
@@ -2211,18 +2422,25 @@ function navCartBadge() {
 }
 
 function bottomNav() {
-  const homeActive  = (S.screen==="home")   ? "active" : "";
-  const cartActive  = (S.screen==="cart")   ? "active" : "";
+  const on = s => (S.screen === s ? "active" : "");
   return `
   <nav class="nav" role="navigation" aria-label="التنقل الرئيسي">
-    <button class="nav-item ${homeActive}" onclick="go('home')" aria-label="الرئيسية">
+    <button class="nav-item ${on("home")}" onclick="go('home')" aria-label="الرئيسية">
       ${iconHome()}
       <span>الرئيسية</span>
     </button>
-    <button class="nav-item ${cartActive}" onclick="go('cart')" aria-label="السلة">
+    <button class="nav-item ${on("orders")}" onclick="go('orders')" aria-label="الطلبات">
+      ${iconReceipt()}
+      <span>الطلبات</span>
+    </button>
+    <button class="nav-item ${on("cart")}" onclick="go('cart')" aria-label="السلة">
       ${iconCart()}
       ${navCartBadge()}
       <span>السلة</span>
+    </button>
+    <button class="nav-item ${on("account")}" onclick="go('account')" aria-label="حسابي">
+      ${iconUser()}
+      <span>حسابي</span>
     </button>
   </nav>`;
 }
@@ -2603,10 +2821,14 @@ function screenCheckout() {
 }
 
 /* "3 منتجات • موزّعان" */
+/* Arabic count agreement: singular, dual, paucal (3-10), then plural. */
+function prodWord(n) {
+  return n === 1 ? "منتج واحد" : n === 2 ? "منتجان" : n <= 10 ? n + " منتجات" : n + " منتجاً";
+}
 function countLabel() {
   const n = S.cart.length;
   const d = new Set(S.cart.map(c => c.d)).size;
-  const nTxt = n === 1 ? "منتج واحد" : n === 2 ? "منتجان" : n <= 10 ? n + " منتجات" : n + " منتجاً";
+  const nTxt = prodWord(n);
   const dTxt = d === 1 ? "موزّع واحد" : d === 2 ? "موزّعان" : d + " موزّعين";
   return nTxt + " • " + dTxt;
 }
@@ -2700,8 +2922,24 @@ function placeOrder() {
     eta:       t + 22 * 60e3,
     driver: { name: "محمود الأنصاري", tel: "+963 944 318 275" }
   };
+  const sups = [...new Set(S.cart.map(c => c.d))];
+  ORDERS.unshift({
+    id:    ORDER.id,
+    sup:   sups.length === 1 ? sups[0] : sups.join(" + "),
+    items: S.cart.length,
+    total: ORDER.total,
+    date:  fmtDay(t),
+    st:    "proc"
+  });
   S.cart = [];
   syncCartBadge();
+}
+
+const AR_MONTHS = ["يناير","فبراير","مارس","أبريل","مايو","يونيو",
+                   "يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+function fmtDay(ms) {
+  const d = new Date(ms);
+  return `${d.getDate()} ${AR_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 }
 
 const AR_MER = h => (h < 12 ? "ص" : "م");
@@ -2844,11 +3082,243 @@ function patchTrack() {
 }
 setInterval(patchTrack, 30e3);
 
+
+/* ══════════════════════════════════════════════
+   LOGIN  — "Dental Supplies design html/login.html"
+══════════════════════════════════════════════ */
+function screenLogin() {
+  return `
+  <main class="login-main">
+    <div class="login-hero">
+      <img src="assets/icon-192.png" alt="">
+    </div>
+
+    <div class="login-intro">
+      <div class="login-lockup">
+        <img src="assets/icon-192.png" alt="" aria-hidden="true">
+        <span class="login-brand">عيادتي</span>
+      </div>
+      <h1 class="login-head">اطلب مستلزماتك السنية بسهولة</h1>
+      <p class="login-sub">منصتك الموثوقة لتأمين عيادتك بأفضل المواد والأدوات الطبية مع توصيل سريع ومباشر.</p>
+    </div>
+
+    <form class="login-card" onsubmit="submitLogin(event)">
+      <label class="login-label" for="loginPhone">رقم الجوال لتسجيل الدخول</label>
+      <div class="login-field" id="loginField">
+        <span class="login-cc">+963</span>
+        <input class="login-input" id="loginPhone" type="tel" inputmode="numeric"
+               autocomplete="tel-national" enterkeyhint="go"
+               placeholder="XXX XXX XXX" aria-describedby="loginErr">
+      </div>
+      <p class="login-err" id="loginErr" role="alert" hidden>أدخل رقم جوال مكوناً من 9 أرقام.</p>
+      <button class="login-go" type="submit">متابعة${iconArrowLeft(16)}</button>
+    </form>
+
+    <div class="login-trust">
+      <div class="login-pill safe">${iconShieldCheck(12)}اتصال آمن وموثق</div>
+      <div class="login-pill fast">${iconBolt(12)}تجهيز فوري للطلبات</div>
+    </div>
+
+    <p class="login-terms">
+      بالاستمرار، أنت توافق على <a href="#" onclick="return false">شروط الاستخدام</a>
+      و <a href="#" onclick="return false">سياسة الخصوصية</a> الخاصة بتطبيق عيادتي.
+    </p>
+  </main>`;
+}
+
+function submitLogin(e) {
+  if (e) e.preventDefault();
+  const i = document.getElementById("loginPhone");
+  const f = document.getElementById("loginField");
+  const m = document.getElementById("loginErr");
+  const digits = (i ? i.value : "").replace(/\D/g, "").replace(/^0+/, "");
+  if (digits.length !== 9) {
+    if (f) f.classList.add("bad");
+    if (m) m.hidden = false;
+    if (i) i.focus();
+    return false;
+  }
+  if (f) f.classList.remove("bad");
+  if (m) m.hidden = true;
+  USER.tel = "+963 " + digits.replace(/(\d{3})(\d{3})(\d{3})/, "$1 $2 $3");
+  S.authed = true;
+  go("home");
+  return false;
+}
+
+function logout() {
+  S.authed = false;
+  S.cart = [];
+  S.q = ""; S.cat = -1; S.ordQ = ""; S.ordF = "all";
+  go("login");
+}
+
+/* ══════════════════════════════════════════════
+   ORDER HISTORY  — "Dental Supplies design html/orders.html"
+══════════════════════════════════════════════ */
+const ORD_ST = {
+  done:   { t: "تم التسليم",   k: "good" },
+  proc:   { t: "قيد المعالجة", k: "warn" },
+  cancel: { t: "ملغى",         k: "bad"  }
+};
+/* demo history, taken from the design file */
+let ORDERS = [
+  { id:"DEN-28490", sup:"اللواج للمستلزمات السنية", items:5,  total:875,  date:"15 سبتمبر 2026", st:"done" },
+  { id:"DEN-28487", sup:"الشرق الأوسط",             items:3,  total:1280, date:"12 سبتمبر 2026", st:"proc" },
+  { id:"DEN-28480", sup:"الشرق الأوسط",             items:8,  total:4200, date:"5 سبتمبر 2026",  st:"done" },
+  { id:"DEN-28474", sup:"إدوارد",                   items:1,  total:150,  date:"28 أغسطس 2026",  st:"cancel" },
+  { id:"DEN-28461", sup:"النور والسلام",            items:12, total:7850, date:"15 أغسطس 2026",  st:"done" }
+];
+const ORD_FILTERS = [
+  { id:"all",    t:"الكل" },
+  { id:"done",   t:"تم التسليم" },
+  { id:"proc",   t:"قيد المعالجة" },
+  { id:"cancel", t:"ملغى" }
+];
+
+function ordMatch(o) {
+  if (S.ordF !== "all" && o.st !== S.ordF) return false;
+  const q = S.ordQ.trim();
+  if (!q) return true;
+  return (o.id + " " + o.sup).toLowerCase().includes(q.toLowerCase());
+}
+
+function ordCard(o) {
+  const st = ORD_ST[o.st] || ORD_ST.proc;
+  return `
+  <div class="ord-card" data-ord="${esc(o.id)}" ${ordMatch(o) ? "" : "hidden"}>
+    <div class="ord-info">
+      <div class="ord-sup">${esc(o.sup)}</div>
+      <div class="ord-money">
+        <span class="ord-total">${$(o.total)}</span>
+        <span class="ord-items">/ ${prodWord(o.items)}</span>
+      </div>
+      <div class="ord-date">${esc(o.date)}</div>
+      <div class="ord-id">${esc(o.id)}</div>
+    </div>
+    <span class="ord-badge ${st.k}">${st.t}</span>
+  </div>`;
+}
+
+function screenOrders() {
+  const none = ORDERS.every(o => !ordMatch(o));
+  return `
+  <header class="hdr ord-hdr" role="banner">
+    <div class="hdr-spacer"></div>
+    <h1 class="hdr-title">سجل الطلبات</h1>
+    <div class="hdr-spacer"></div>
+  </header>
+  <main class="ord-main">
+    <div class="ord-search">
+      <span class="ord-search-ico">${iconSearch(20)}</span>
+      <input id="ordQ" type="search" enterkeyhint="search"
+             placeholder="البحث برقم الطلب أو المورد..." value="${esc(S.ordQ)}"
+             aria-label="البحث في سجل الطلبات">
+    </div>
+    <div class="ord-filters" role="list" aria-label="تصفية حسب الحالة">
+      ${ORD_FILTERS.map(f => `
+        <button class="ord-filter ${S.ordF === f.id ? "on" : ""}" role="listitem"
+                data-ordf="${f.id}" onclick="setOrdFilter('${f.id}')">${f.t}</button>`).join("")}
+    </div>
+    <div class="ord-list" id="ordList">
+      ${ORDERS.map(ordCard).join("")}
+      <p class="ord-empty" id="ordEmpty" ${none ? "" : "hidden"}>لا توجد طلبات مطابقة.</p>
+    </div>
+  </main>
+  ${bottomNav()}`;
+}
+
+/* Filter in place: the cards stay in the DOM and are toggled, so nothing
+   is rebuilt and the search field never loses focus. */
+function applyOrdFilter() {
+  let shown = 0;
+  ORDERS.forEach(o => {
+    const el = document.querySelector(`.ord-card[data-ord="${CSS_esc(o.id)}"]`);
+    if (!el) return;
+    const vis = ordMatch(o);
+    el.hidden = !vis;
+    if (vis) shown++;
+  });
+  const empty = document.getElementById("ordEmpty");
+  if (empty) empty.hidden = shown > 0;
+}
+/* order ids are [A-Z0-9-] only, but escape anyway rather than trust the data */
+function CSS_esc(v) {
+  return (window.CSS && CSS.escape) ? CSS.escape(v) : String(v).replace(/["\\]/g, "\\$&");
+}
+
+function setOrdFilter(id) {
+  if (S.ordF === id) return;
+  S.ordF = id;
+  document.querySelectorAll(".ord-filter").forEach(b => {
+    b.classList.toggle("on", b.getAttribute("data-ordf") === id);
+  });
+  applyOrdFilter();
+}
+
+/* ══════════════════════════════════════════════
+   ACCOUNT / SETTINGS  — "Dental Supplies design html/my-account.html"
+══════════════════════════════════════════════ */
+/* `soon` marks a row whose screen has not been designed yet. */
+const ACCT_ROWS = [
+  { id:"clinic", label:"معلومات العيادة", icon:iconClinic,  tag:{ t:"مكتمل",  k:"good" }, soon:true },
+  { id:"addr",   label:"العناوين",        icon:iconPin,                                    soon:true },
+  { id:"pay",    label:"طرق الدفع",       icon:iconCardSm,                                 soon:true },
+  { id:"notif",  label:"الإشعارات",       icon:iconBell,    tag:{ t:"٣ جديدة", k:"pri" },  soon:true },
+  { id:"help",   label:"الدعم الفني",     icon:iconSupport, href:"tel:+963115000000" }
+];
+
+function acctRow(r) {
+  const inner = `
+    <span class="acc-ico">${r.icon(18)}</span>
+    <span class="acc-label">${r.label}</span>
+    ${r.tag ? `<span class="acc-tag ${r.tag.k}">${r.tag.t}</span>` : ""}
+    <span class="acc-chev">${iconChevronL()}</span>`;
+  if (r.href) return `<a class="acc-row" href="${r.href}" data-acc="${r.id}">${inner}</a>`;
+  return `<button class="acc-row soon" type="button" data-acc="${r.id}" aria-disabled="true">${inner}</button>`;
+}
+
+function screenAccount() {
+  const initials = USER.name.replace(/^د\.\s*/, "").split(/\s+/).slice(0, 2)
+                     .map(w => w.replace(/^ال/, "")[0]).join(" ");
+  return `
+  <header class="hdr acc-hdr" role="banner">
+    <div class="hdr-spacer"></div>
+    <h1 class="hdr-title">الملف الشخصي</h1>
+    <div class="hdr-spacer"></div>
+  </header>
+  <main class="acc-main">
+    <section class="acc-profile">
+      <span class="acc-avatar" aria-hidden="true">${initials}</span>
+      <div class="acc-who">
+        <div class="acc-name">${esc(USER.name)}</div>
+        <div class="acc-state">العيادة نشطة</div>
+      </div>
+      <button class="acc-edit soon" type="button" aria-disabled="true">${iconPencil()}تعديل</button>
+    </section>
+
+    <h2 class="acc-sec-title">الإعدادات العامة</h2>
+    <section class="acc-group">${ACCT_ROWS.map(acctRow).join("")}</section>
+
+    <section class="acc-group acc-out">
+      <button class="acc-row" type="button" onclick="logout()" data-acc="logout">
+        <span class="acc-ico">${iconLogout(18)}</span>
+        <span class="acc-label">تسجيل الخروج</span>
+        <span class="acc-chev">${iconChevronL()}</span>
+      </button>
+    </section>
+
+    <p class="acc-ver">نسخة التطبيق ${USER.version}</p>
+  </main>
+  ${bottomNav()}`;
+}
+
 /* ══════════════════════════════════════════════
    RENDER
 ══════════════════════════════════════════════ */
 /* How deep each screen sits, so a transition can tell forward from back. */
-const DEPTH = { home: 0, detail: 1, cart: 1, checkout: 2, track: 3 };
+const DEPTH = { login: -1, home: 0, orders: 0, account: 0,
+                detail: 1, cart: 1, checkout: 2, track: 3 };
 const depthOf = s => (s in DEPTH ? DEPTH[s] : 0);
 let prevScreen = null;
 
@@ -2858,8 +3328,10 @@ function animateScreen(a) {
   if (typeof a.animate !== "function") return;
   const reduce = prefersReducedMotion();
   const first  = prevScreen === null;
-  const fwd    = first || depthOf(S.screen) >= depthOf(prevScreen);
-  const from   = (first || reduce) ? "none" : `translateX(${fwd ? -10 : 10}px)`;
+  // same depth means a lateral move between tabs: cross-fade, no travel,
+  // because neither direction would mean anything
+  const d      = first ? 1 : depthOf(S.screen) - depthOf(prevScreen);
+  const from   = (first || reduce || d === 0) ? "none" : `translateX(${d > 0 ? -10 : 10}px)`;
   try {
     a.animate(
       [{ opacity: 0, transform: from }, { opacity: 1, transform: "none" }],
@@ -2873,7 +3345,10 @@ function render(keep) {
   const prevScrollTop = keep ? (document.querySelector("main") || {}).scrollTop : 0;
 
   let h = "";
-  if      (S.screen === "home")     h = screenHome();
+  if      (S.screen === "login")    h = screenLogin();
+  else if (S.screen === "home")     h = screenHome();
+  else if (S.screen === "orders")   h = screenOrders();
+  else if (S.screen === "account")  h = screenAccount();
   else if (S.screen === "detail")   h = screenDetail();
   else if (S.screen === "cart")     h = screenCart();
   else if (S.screen === "checkout") h = screenCheckout();
@@ -2889,6 +3364,15 @@ function render(keep) {
   // Restore scroll
   const m = a.querySelector("main");
   if (m && prevScrollTop) m.scrollTop = prevScrollTop;
+
+  // Wire up the order-history search
+  const oq = document.getElementById("ordQ");
+  if (oq) {
+    const upd = () => { S.ordQ = oq.value; applyOrdFilter(); };
+    oq.addEventListener("input",  upd);
+    oq.addEventListener("search", upd);
+    oq.addEventListener("keydown", e => { if (e.key === "Enter") { upd(); oq.blur(); } });
+  }
 
   // Wire up search
   const qi = document.getElementById("q");
